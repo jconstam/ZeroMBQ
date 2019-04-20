@@ -1,0 +1,13 @@
+language: cpp
+compiler: gcc
+dist: xenial
+
+addons:
+  apt:
+    packages:
+      cmake
+      libzmq-dev
+      libjansson-dev
+
+script:
+  ./build.sh
