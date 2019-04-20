@@ -9,8 +9,5 @@ addons:
       libzmq-dev
       libjansson-dev
 
-before-install:
-  chmod +x build.sh
-
 script:
   ./build.sh
