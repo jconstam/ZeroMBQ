@@ -5,7 +5,7 @@ UNITTEST_PATH=${ROOT_PATH}/test/unittests
 
 BUILD_PATH=${ROOT_PATH}/build
 OUTPUT_PATH=${BUILD_PATH}/zerombq
-OUTPUT_UNITTEST_PATH=${BUILD_PATH}/unittest
+OUTPUT_UNITTEST_PATH=${BUILD_PATH}/unittests
 
 .PHONY: build
 build:
