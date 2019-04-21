@@ -10,7 +10,10 @@ addons:
       libjsoncpp-dev
 
 jobs:
-  stage: test
-  script: make -j test
-  stage: build
-  script: make -j
+  include:
+    stage: test
+    name: "Unit Tests"
+    script: make -j unittests
+    stage: build
+    name: "Build Binary"
+    script: make -j
