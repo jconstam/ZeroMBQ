@@ -9,5 +9,8 @@ addons:
       libzmq3-dev
       libjsoncpp-dev
 
-script:
-  make -j
+jobs:
+  stage: test
+  script: make -j test
+  stage: build
+  script: make -j
