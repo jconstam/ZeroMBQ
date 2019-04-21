@@ -8,6 +8,8 @@ addons:
       cmake
       libzmq3-dev
       libjsoncpp-dev
+      doxygen
+      graphviz
 
 jobs:
   include:
