@@ -4,10 +4,8 @@ set( PROJECT_NAME "ZeroMBQ" )
 
 project( ${PROJECT_NAME} ) 
 
-set( SOURCE_PATH ${PROJECT_SOURCE_DIR}/src )
-
 set( SOURCES 
-    ${SOURCE_PATH}/main.cpp
+    ${PROJECT_SOURCE_DIR}/main.cpp
 )
 
 add_executable( ${PROJECT_NAME} ${SOURCES} )

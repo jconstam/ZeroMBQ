@@ -10,4 +10,4 @@ addons:
       libjsoncpp-dev
 
 script:
-  ./build.sh
+  make -j
