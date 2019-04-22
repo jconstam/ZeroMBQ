@@ -1,0 +1,27 @@
+{
+    "slaves":[
+        {
+            "deviceID": 1,
+            "data":[
+                {
+                    "tag": "Modbus.Data.1",
+                    "type": "uint16",
+                    "order": "12",
+                    "address": 0
+                },
+                {
+                    "tag": "Modbus.Data.2",
+                    "type": "uint16",
+                    "order": "21",
+                    "address": 1
+                },
+                {
+                    "tag": "Modbus.Data.3",
+                    "type": "uint32",
+                    "order": "1234",
+                    "address": 2
+                }
+            ]
+        }
+    ]
+}
