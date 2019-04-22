@@ -1,11 +1,11 @@
 ROOT_PATH=$(shell pwd)
 
 SOURCE_PATH=${ROOT_PATH}/src
-UNITTEST_PATH=${ROOT_PATH}/test/unittests
+TEST_PATH=${ROOT_PATH}/test
 
 BUILD_PATH=${ROOT_PATH}/build
 OUTPUT_PATH=${BUILD_PATH}/zerombq
-OUTPUT_UNITTEST_PATH=${BUILD_PATH}/unittests
+OUTPUT_TEST_PATH=${BUILD_PATH}/test
 
 .PHONY: build
 build:
@@ -13,12 +13,17 @@ build:
 	cd ${OUTPUT_PATH} && cmake ${SOURCE_PATH} && $(MAKE)
 
 .PHONY: test
-test: unittests
+test: build_unittests
+	cd ${OUTPUT_TEST_PATH} && ctest
 
 .PHONY: unittests
-unittests:
-	mkdir -p ${OUTPUT_UNITTEST_PATH}
-	cd ${OUTPUT_UNITTEST_PATH} && cmake ${UNITTEST_PATH} && $(MAKE) && ctest
+unittests: build_unittests
+	cd ${OUTPUT_TEST_PATH} && ./ZeroMBQTest
+
+.PHONY: build_unittests
+build_unittests:
+	mkdir -p ${OUTPUT_TEST_PATH}
+	cd ${OUTPUT_TEST_PATH} && cmake ${TEST_PATH} && $(MAKE)
 
 .PHONY: clean
 clean:

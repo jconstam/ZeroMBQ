@@ -16,10 +16,6 @@ set( SOURCES
 
 find_package( jsoncpp REQUIRED )
 
-message( STATUS, "BLAH!" )
-message( STATUS, ${jsoncpp_INCLUDE_DIR} )
-include_directories( ${jsoncpp_INCLUDE_DIR} )
-
 include_directories( ${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
 add_executable( ${PROJECT_NAME} ${SOURCES} )
 target_link_libraries( ${PROJECT_NAME} zmq jsoncpp )

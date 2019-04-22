@@ -42,7 +42,7 @@ ConvertFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
 
 bool ZMBQData::Convert_uint16_12( uint16_t* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
 {
-    if( bufferIndex + sizeof( uint16_t ) >= bufferSize )
+    if( bufferIndex + sizeof( uint16_t ) > bufferSize )
     {
         return false;
     }
@@ -57,7 +57,7 @@ bool ZMBQData::Convert_uint16_12( uint16_t* rawData, uint8_t* outBuffer, uint32_
 
 bool ZMBQData::Convert_uint16_21( uint16_t* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
 {
-    if( bufferIndex + sizeof( uint16_t ) >= bufferSize )
+    if( bufferIndex + sizeof( uint16_t ) > bufferSize )
     {
         return false;
     }
