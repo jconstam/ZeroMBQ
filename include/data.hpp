@@ -28,6 +28,8 @@ class ZMBQData
         static ConvertFunc getConversionFunc( DATA_TYPE, string );
         static bool Convert_uint16_12( uint16_t*, uint8_t*, uint32_t, uint32_t );
         static bool Convert_uint16_21( uint16_t*, uint8_t*, uint32_t, uint32_t );
+        static bool Convert_uint32_4321( uint16_t*, uint8_t*, uint32_t, uint32_t );
+        static bool Convert_uint32_1234( uint16_t*, uint8_t*, uint32_t, uint32_t );
 };
 
 #endif
