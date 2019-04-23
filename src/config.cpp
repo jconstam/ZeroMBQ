@@ -18,15 +18,17 @@ bool ZeroMBQConfig::parseConfig( string path )
     file >> root;
 
     parseSlaveConfig( root[ "slaves" ] );
+
+    return true;
 }
 
 void ZeroMBQConfig::parseSlaveConfig( const Json::Value slaves )
 {
-    for ( int slaveIndex = 0; slaveIndex < slaves.size(); slaveIndex++ )
+    for ( unsigned int slaveIndex = 0; slaveIndex < slaves.size(); slaveIndex++ )
     {
         ZeroMBQSlave currSlave( slaves[ slaveIndex ][ "deviceID" ].asUInt( ) );
         Json::Value currSlaveData = slaves[ slaveIndex ];
-        for ( int dataIndex = 0; dataIndex < currSlaveData[ "data" ].size(); dataIndex++ )
+        for ( unsigned int dataIndex = 0; dataIndex < currSlaveData[ "data" ].size(); dataIndex++ )
         {
             Json::Value currData = currSlaveData[ "data" ][ dataIndex ];
 
