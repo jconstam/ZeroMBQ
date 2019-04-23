@@ -23,6 +23,16 @@ TEST_F( DataTest, TypeFromString )
     EXPECT_EQ( DATA_TYPE_UINT16, ZMBQData::typeFromString( "dummy" ) );
 }
 
+TEST_F( DataTest, GetConversionFunc )
+{
+    EXPECT_EQ( &( ZMBQData::Convert_uint32_4321 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT32, "4321" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint32_1234 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT32, "1234" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint32_1234 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT32, "dummy" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint16_21 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT16, "21" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint16_12 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT16, "12" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint16_12 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT16, "dummy" ) );
+}
+
 TEST_F( DataTest, ConvertUInt16Order12Fail )
 {
     uint16_t raw = 0x1234;

@@ -33,7 +33,6 @@ ConvertFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
     switch( type )
     {
         case( DATA_TYPE_UINT32 ):
-            break;
             if( order.compare( "4321" ) == 0 )
             {
                 return &( Convert_uint32_4321 );
@@ -42,6 +41,7 @@ ConvertFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
             {
                 return &( Convert_uint32_1234 );
             }
+            break;
         case( DATA_TYPE_UINT16 ):
         default:
             if( order.compare( "21" ) == 0 )
