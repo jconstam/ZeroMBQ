@@ -9,12 +9,12 @@ ZeroMBQConfig::ZeroMBQConfig( )
 
 }
 
-bool ZeroMBQConfig::parseConfig( string path )
+bool ZeroMBQConfig::parseConfig( string filePath )
 {
     Json::Value root;
     Json::Reader reader;
 
-    ifstream file( path );
+    ifstream file( filePath );
     file >> root;
 
     parseSlaveConfig( root[ "slaves" ] );
@@ -38,4 +38,17 @@ void ZeroMBQConfig::parseSlaveConfig( const Json::Value slaves )
 
         m_slaveList[ currSlave.GetDeviceID( ) ] = currSlave;
     }
+}
+
+ZeroMBQSlave* ZeroMBQConfig::getSlave( uint16_t deviceID )
+{
+    if( m_slaveList.find( deviceID ) != m_slaveList.end( ) )
+    {
+        return nullptr;
+    }
+    else
+    {
+        return &( m_slaveList[ deviceID ] );
+    }
+    
 }

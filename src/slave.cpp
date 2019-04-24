@@ -8,9 +8,13 @@ ZeroMBQSlave::ZeroMBQSlave( uint16_t deviceID )
 
 void ZeroMBQSlave::AddDataItem( string itemName, ZeroMBQDataItem* newItem )
 {
-    m_data[ itemName ] = newItem;
+    m_dataLookup[ itemName ] = newItem;
+
+    m_modbusData.resize( newItem->getAddress( ) + 1U, 0U );
 }
-uint16_t ZeroMBQSlave::GetDeviceID( )
+
+uint16_t ZeroMBQSlave::GetDeviceID( ) const
 {
     return m_deviceID;
 }
+

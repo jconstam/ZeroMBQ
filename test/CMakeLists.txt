@@ -43,8 +43,10 @@ set( SOURCES_ROOT ${PROJECT_SOURCE_DIR}/../src )
 
 set( UNITTEST_SOURCES
     ${SOURCES_ROOT}/data.cpp
+    ${SOURCES_ROOT}/dataItem.cpp
 
     ${UNITTEST_ROOT}/dataTest.cpp
+    ${UNITTEST_ROOT}/dataItemTest.cpp
 )
 
 include_directories( ${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )

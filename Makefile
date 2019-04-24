@@ -10,7 +10,7 @@ OUTPUT_TEST_PATH=${BUILD_PATH}/test
 .PHONY: build
 build:
 	mkdir -p ${OUTPUT_PATH}
-	cd ${OUTPUT_PATH} && cmake ${SOURCE_PATH} && $(MAKE)
+	cd ${OUTPUT_PATH} && cmake ${SOURCE_PATH} && $(MAKE) $(MAKEFLAGS)
 
 .PHONY: test
 test: build_unittests
@@ -23,7 +23,7 @@ unittests: build_unittests
 .PHONY: build_unittests
 build_unittests:
 	mkdir -p ${OUTPUT_TEST_PATH}
-	cd ${OUTPUT_TEST_PATH} && cmake ${TEST_PATH} && $(MAKE)
+	cd ${OUTPUT_TEST_PATH} && cmake ${TEST_PATH} && $(MAKE) $(MAKEFLAGS)
 
 .PHONY: clean
 clean:

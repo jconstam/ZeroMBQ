@@ -5,6 +5,7 @@ using namespace std;
 
 #include <string>
 #include <map>
+#include <vector>
 
 #include "data.hpp"
 #include "dataItem.hpp"
@@ -13,14 +14,15 @@ class ZeroMBQSlave
 {
     public:
         ZeroMBQSlave( );
-        ZeroMBQSlave( uint16_t );
+        ZeroMBQSlave( uint16_t deviceID );
 
-        void AddDataItem( string, ZeroMBQDataItem* );
-        uint16_t GetDeviceID( );
+        void AddDataItem( string itemName, ZeroMBQDataItem* newItem );
+        uint16_t GetDeviceID( ) const;
 
     private:
         uint16_t m_deviceID;
-        map<string,ZeroMBQDataItem*> m_data;
+        map< string, ZeroMBQDataItem* > m_dataLookup;
+        vector< uint16_t > m_modbusData;
 };
 
 #endif

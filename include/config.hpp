@@ -14,12 +14,13 @@ class ZeroMBQConfig
 {
     public:
         ZeroMBQConfig( );
-        bool parseConfig( string );
+        bool parseConfig( string filePath );
 
     private:
         map<uint16_t, ZeroMBQSlave> m_slaveList;
 
-        void parseSlaveConfig( const Json::Value );
+        void parseSlaveConfig( const Json::Value slaves );
+        ZeroMBQSlave* getSlave( uint16_t deviceID );
 };
 
 #endif
