@@ -10,7 +10,7 @@ void ZeroMBQSlave::AddDataItem( string itemName, ZeroMBQDataItem* newItem )
 {
     m_dataLookup[ itemName ] = newItem;
 
-    m_modbusData.resize( newItem->getAddress( ) + 1U, 0U );
+    m_modbusData.resize( ( newItem->getAddress( ) + 1U ) * sizeof( uint16_t ), 0U );
 }
 
 uint16_t ZeroMBQSlave::GetDeviceID( ) const
@@ -18,3 +18,15 @@ uint16_t ZeroMBQSlave::GetDeviceID( ) const
     return m_deviceID;
 }
 
+void ZeroMBQSlave::ProcessNewData( string tag, void* data, uint32_t dataSize )
+{
+    if( m_dataLookup.find( tag ) != m_dataLookup.end( ) )
+    {
+        ZeroMBQDataItem* dataItem = m_dataLookup[ tag ];
+
+        if( ! dataItem->getConvertFunc( )( data, m_modbusData.data( ), dataItem->getAddress( ), dataSize ) )
+        {
+            
+        }
+    }
+}

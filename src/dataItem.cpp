@@ -6,7 +6,6 @@ ZeroMBQDataItem::ZeroMBQDataItem( int address, string order, string tag, string 
     m_tag = tag;
     m_type = ZMBQData::typeFromString( type );
     m_convertFunc = ZMBQData::getConversionFunc( m_type, order );
-    m_parseRawDataFunc = ZMBQData::getParseRawDataFunc( m_type );
 }
 
 uint16_t ZeroMBQDataItem::getAddress( ) const
@@ -24,8 +23,4 @@ DATA_TYPE ZeroMBQDataItem::getType( ) const
 ConvertFunc ZeroMBQDataItem::getConvertFunc( ) const
 {
     return m_convertFunc;
-}
-ParseRawDataFunc ZeroMBQDataItem::getParseRawDataFunc( ) const
-{
-    return m_parseRawDataFunc;
 }
