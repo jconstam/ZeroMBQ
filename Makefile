@@ -6,6 +6,7 @@ TEST_PATH=${ROOT_PATH}/test
 BUILD_PATH=${ROOT_PATH}/build
 OUTPUT_PATH=${BUILD_PATH}/zerombq
 OUTPUT_TEST_PATH=${BUILD_PATH}/test
+OUTPUT_UNITTEST_PATH=${OUTPUT_TEST_PATH}/unittests
 
 .PHONY: build
 build:
@@ -18,7 +19,7 @@ test: build_unittests
 
 .PHONY: unittests
 unittests: build_unittests
-	cd ${OUTPUT_TEST_PATH} && ./ZeroMBQTest
+	cd ${OUTPUT_UNITTEST_PATH} && ./ZeroMBQTest
 
 .PHONY: build_unittests
 build_unittests:
