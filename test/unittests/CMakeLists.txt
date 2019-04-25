@@ -38,6 +38,7 @@ set( UNITTEST_SOURCES
     ${UNITTEST_ROOT}/dataItemTest.cpp
 )
 
+set( UNITTEST_PROJECT_NAME "ZeroMBQTest" )
 include_directories( ${UNITTEST_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
 add_executable( ${UNITTEST_PROJECT_NAME} ${UNITTEST_SOURCES} )
 target_link_libraries( ${UNITTEST_PROJECT_NAME} gtest_main )

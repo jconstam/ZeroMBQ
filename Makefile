@@ -15,7 +15,7 @@ build:
 
 .PHONY: test
 test: build_unittests
-	cd ${OUTPUT_TEST_PATH} && ctest
+	cd ${OUTPUT_TEST_PATH} && ctest -V
 
 .PHONY: unittests
 unittests: build_unittests
