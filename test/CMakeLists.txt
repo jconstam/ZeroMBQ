@@ -3,7 +3,8 @@ cmake_minimum_required( VERSION 3.5 )
 set( PROJECT_NAME "ZeroMBQTest" )
 enable_testing( )
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
+set( CMAKE_CXX_STANDARD 11 )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror" )
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -37,10 +38,18 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
-set( TEST_SOURCES
-    ${PROJECT_SOURCE_DIR}/exampleTest.cpp
+set( UNITTEST_ROOT ${PROJECT_SOURCE_DIR}/unittests )
+set( SOURCES_ROOT ${PROJECT_SOURCE_DIR}/../src )
+
+set( UNITTEST_SOURCES
+    ${SOURCES_ROOT}/data.cpp
+    ${SOURCES_ROOT}/dataItem.cpp
+
+    ${UNITTEST_ROOT}/dataTest.cpp
+    ${UNITTEST_ROOT}/dataItemTest.cpp
 )
 
-add_executable( ${PROJECT_NAME} ${TEST_SOURCES} )
+include_directories( ${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
+add_executable( ${PROJECT_NAME} ${UNITTEST_SOURCES} )
 target_link_libraries( ${PROJECT_NAME} gtest_main )
-add_test(unittests ${PROJECT_NAME})
+add_test( unittests ${PROJECT_NAME} )
