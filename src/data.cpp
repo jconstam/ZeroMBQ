@@ -42,28 +42,28 @@ ConvertFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
         case( DATA_TYPE_UINT32 ):
             if( order.compare( "4321" ) == 0 )
             {
-                return &( Convert_uint32_4321 );
+                return &( Convert_zmq_to_uint32_4321 );
             }
             else
             {
-                return &( Convert_uint32_1234 );
+                return &( Convert_zmq_to_uint32_1234 );
             }
             break;
         case( DATA_TYPE_UINT16 ):
         default:
             if( order.compare( "21" ) == 0 )
             {
-                return &( Convert_uint16_21 );
+                return &( Convert_zmq_to_uint16_21 );
             }
             else
             {
-                return &( Convert_uint16_12 );
+                return &( Convert_zmq_to_uint16_12 );
             }
             break;
     }
 }
 
-bool ZMBQData::Convert_uint16_12( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
+bool ZMBQData::Convert_zmq_to_uint16_12( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
 {
     RAWDATA_UINT16* rawData = ( RAWDATA_UINT16* ) rawBuffer;
     
@@ -77,7 +77,7 @@ bool ZMBQData::Convert_uint16_12( void* rawBuffer, uint8_t* outBuffer, uint32_t 
     return true;
 }
 
-bool ZMBQData::Convert_uint16_21( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
+bool ZMBQData::Convert_zmq_to_uint16_21( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
 {
     RAWDATA_UINT16* rawData = ( RAWDATA_UINT16* ) rawBuffer;
 
@@ -91,7 +91,7 @@ bool ZMBQData::Convert_uint16_21( void* rawBuffer, uint8_t* outBuffer, uint32_t 
     return true;
 }
 
-bool ZMBQData::Convert_uint32_4321( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
+bool ZMBQData::Convert_zmq_to_uint32_4321( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
 {
     RAWDATA_UINT32* rawData = ( RAWDATA_UINT32* ) rawBuffer;
 
@@ -107,7 +107,7 @@ bool ZMBQData::Convert_uint32_4321( void* rawBuffer, uint8_t* outBuffer, uint32_
     return true;
 }
 
-bool ZMBQData::Convert_uint32_1234( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
+bool ZMBQData::Convert_zmq_to_uint32_1234( void* rawBuffer, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize )
 {
     RAWDATA_UINT32* rawData = ( RAWDATA_UINT32* ) rawBuffer;
 

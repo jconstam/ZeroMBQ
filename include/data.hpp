@@ -40,10 +40,11 @@ class ZMBQData
         static DATA_TYPE typeFromString( string typeString );
 
         static ConvertFunc getConversionFunc( DATA_TYPE type, string order );
-        static bool Convert_uint16_12( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_uint16_21( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_uint32_4321( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_uint32_1234( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
+
+        static bool Convert_zmq_to_uint16_12( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
+        static bool Convert_zmq_to_uint16_21( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
+        static bool Convert_zmq_to_uint32_4321( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
+        static bool Convert_zmq_to_uint32_1234( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
 };
 
 #endif
