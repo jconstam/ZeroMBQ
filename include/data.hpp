@@ -13,7 +13,7 @@ using namespace std;
 #define DATATYPE_STRING_UINT16      "uint16"
 #define DATATYPE_STRING_UINT32      "uint32"
 
-typedef bool (*ConvertFunc)( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
+typedef bool (*ConvertFromZMQFunc)( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
 
 typedef enum
 {
@@ -39,12 +39,14 @@ class ZMBQData
     public:
         static DATA_TYPE typeFromString( string typeString );
 
-        static ConvertFunc getConversionFunc( DATA_TYPE type, string order );
+        static ConvertFromZMQFunc getConversionFunc( DATA_TYPE type, string order );
 
         static bool Convert_zmq_to_uint16_12( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
         static bool Convert_zmq_to_uint16_21( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
         static bool Convert_zmq_to_uint32_4321( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
         static bool Convert_zmq_to_uint32_1234( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
+
+        static bool Convert_uint16_12_to_zmq( uint16_t value, void** buffer, uint32_t bufferSize );
 };
 
 #endif

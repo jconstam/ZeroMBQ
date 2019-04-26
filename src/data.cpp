@@ -35,7 +35,7 @@ DATA_TYPE ZMBQData::typeFromString( string typeString )
     return type;
 }
 
-ConvertFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
+ConvertFromZMQFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
 {
     switch( type )
     {

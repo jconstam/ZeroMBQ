@@ -20,7 +20,7 @@ DATA_TYPE ZeroMBQDataItem::getType( ) const
 {
     return m_type;
 }
-ConvertFunc ZeroMBQDataItem::getConvertFunc( ) const
+ConvertFromZMQFunc ZeroMBQDataItem::getConvertFunc( ) const
 {
     return m_convertFunc;
 }
