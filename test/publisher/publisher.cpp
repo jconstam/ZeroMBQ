@@ -41,15 +41,18 @@ typedef struct
 static PUBLISHER_PARAMS processArgs( int argc, char* argv[] )
 {
     int opt = 0;
-    PUBLISHER_PARAMS params = { INT32_MAX };
+    PUBLISHER_PARAMS params;
+    params.port = INT32_MAX;
     params.tag = "";
     params.type = ( DATA_TYPE ) INT32_MAX;
+    params.value_uint16 = UINT16_MAX;
+    params.value_uint32 = UINT32_MAX;
 
     string typeString;
 
     do
     {
-        opt = getopt( argc, argv, "p:t:" );
+        opt = getopt( argc, argv, "p:t:y:v:o:" );
 
         switch ( opt )
         {
@@ -102,6 +105,7 @@ static PUBLISHER_PARAMS processArgs( int argc, char* argv[] )
 int main( int argc, char *argv[] )
 {
     PUBLISHER_PARAMS pubParams = processArgs( argc, argv );
+
 
     return 0;
 }

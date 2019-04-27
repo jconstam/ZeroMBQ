@@ -34,15 +34,15 @@ using namespace std;
 #define VALIDATE_TO_ZMQ_PARAMS( value, buffer, bufferSize, typeSize ) \
     if( ( value ) == nullptr ) \
     { \
-        return false; \
+        return 0U; \
     } \
     else if( ( buffer ) == nullptr ) \
     { \
-        return false; \
+        return 0U; \
     } \
     else if( ( bufferSize ) < DATA_TYPE_RAW_SIZE + ( typeSize ) ) \
     { \
-        return false; \
+        return 0U; \
     }
 
 DATA_TYPE ZMBQData::typeFromString( string typeString )
@@ -176,7 +176,7 @@ bool ZMBQData::Convert_zmq_to_uint32_1234( void* rawBuffer, uint8_t* outBuffer, 
     return true;
 }
 
-bool ZMBQData::Convert_uint16_12_to_zmq( void* value, void* buffer, uint32_t bufferSize )
+size_t ZMBQData::Convert_uint16_12_to_zmq( void* value, void* buffer, uint32_t bufferSize )
 {
     VALIDATE_TO_ZMQ_PARAMS( value, buffer, bufferSize, sizeof( uint16_t ) );
 
@@ -184,9 +184,9 @@ bool ZMBQData::Convert_uint16_12_to_zmq( void* value, void* buffer, uint32_t buf
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 0U, value, 1 );
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 1U, value, 0 );
 
-    return true;
+    return DATA_TYPE_RAW_SIZE + sizeof( uint16_t );
 }
-bool ZMBQData::Convert_uint16_21_to_zmq( void* value, void* buffer, uint32_t bufferSize )
+size_t ZMBQData::Convert_uint16_21_to_zmq( void* value, void* buffer, uint32_t bufferSize )
 {
     VALIDATE_TO_ZMQ_PARAMS( value, buffer, bufferSize, sizeof( uint16_t ) );
 
@@ -194,9 +194,9 @@ bool ZMBQData::Convert_uint16_21_to_zmq( void* value, void* buffer, uint32_t buf
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 0U, value, 0 );
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 1U, value, 1 );
 
-    return true;
+    return DATA_TYPE_RAW_SIZE + sizeof( uint16_t );
 }
-bool ZMBQData::Convert_uint32_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize )
+size_t ZMBQData::Convert_uint32_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize )
 {
     VALIDATE_TO_ZMQ_PARAMS( value, buffer, bufferSize, sizeof( uint32_t ) );
 
@@ -206,9 +206,9 @@ bool ZMBQData::Convert_uint32_1234_to_zmq( void* value, void* buffer, uint32_t b
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 2U, value, 1 );
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 3U, value, 0 );
 
-    return true;
+    return DATA_TYPE_RAW_SIZE + sizeof( uint32_t );
 }
-bool ZMBQData::Convert_uint32_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize )
+size_t ZMBQData::Convert_uint32_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize )
 {
     VALIDATE_TO_ZMQ_PARAMS( value, buffer, bufferSize, sizeof( uint32_t ) );
 
@@ -218,5 +218,5 @@ bool ZMBQData::Convert_uint32_4321_to_zmq( void* value, void* buffer, uint32_t b
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 2U, value, 2 );
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 3U, value, 3 );
 
-    return true;
+    return DATA_TYPE_RAW_SIZE + sizeof( uint32_t );
 }
