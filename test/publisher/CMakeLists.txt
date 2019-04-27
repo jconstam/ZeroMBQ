@@ -7,6 +7,7 @@ set( PUBLISHER_SOURCES
 set( PUBLISHER_PROJECT_NAME "Publisher" )
 include_directories( ${PUBLISHER_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
 add_executable( ${PUBLISHER_PROJECT_NAME} ${PUBLISHER_SOURCES} )
+target_link_libraries( ${PUBLISHER_PROJECT_NAME} zmq )
 
 add_test( publisher_noTCPPort ${PUBLISHER_PROJECT_NAME} )
 set_tests_properties( publisher_noTCPPort PROPERTIES WILL_FAIL TRUE )

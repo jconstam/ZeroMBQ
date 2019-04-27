@@ -9,6 +9,9 @@
 using namespace std;
 
 #define DATA_TYPE_RAW_SIZE          ( sizeof( uint32_t ) )
+#define ZMQ_BUFFER_SIZE_UINT16      ( DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) )
+#define ZMQ_BUFFER_SIZE_UINT32      ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) )
+#define ZMQ_BUFFER_SIZE_MAX         ( max( ZMQ_BUFFER_SIZE_UINT32, ZMQ_BUFFER_SIZE_UINT16 ) )
 
 #define DATATYPE_STRING_UINT16      "uint16"
 #define DATATYPE_STRING_UINT32      "uint32"

@@ -213,9 +213,9 @@ TEST_F( DataTest, ConvertZMQToUInt32Order4321NullOutBuffer )
 TEST_F( DataTest, ConvertUInt16Order12ToZMQNullValue )
 {
     //uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_12_to_zmq( nullptr, buffer, DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_12_to_zmq( nullptr, buffer, ZMQ_BUFFER_SIZE_UINT16 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -227,9 +227,9 @@ TEST_F( DataTest, ConvertUInt16Order12ToZMQNullValue )
 TEST_F( DataTest, ConvertUInt16Order12ToZMQNullBuffer )
 {
     uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_12_to_zmq( &( value ), nullptr, DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_12_to_zmq( &( value ), nullptr, ZMQ_BUFFER_SIZE_UINT16 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -241,7 +241,7 @@ TEST_F( DataTest, ConvertUInt16Order12ToZMQNullBuffer )
 TEST_F( DataTest, ConvertUInt16Order12ToZMQBadBufferSize )
 {
     uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
     EXPECT_EQ( 0U, ZMBQData::Convert_uint16_12_to_zmq( &( value ), buffer, 2U ) );
 
@@ -255,9 +255,9 @@ TEST_F( DataTest, ConvertUInt16Order12ToZMQBadBufferSize )
 TEST_F( DataTest, ConvertUInt16Order12ToZMQ )
 {
     uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
-    EXPECT_EQ( DATA_TYPE_RAW_SIZE + sizeof( uint16_t ), ZMBQData::Convert_uint16_12_to_zmq( &( value ), buffer, DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ) );
+    EXPECT_EQ( ZMQ_BUFFER_SIZE_UINT16, ZMBQData::Convert_uint16_12_to_zmq( &( value ), buffer, ZMQ_BUFFER_SIZE_UINT16 ) );
 
     EXPECT_EQ( ( uint8_t ) DATA_TYPE_UINT16, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -270,9 +270,9 @@ TEST_F( DataTest, ConvertUInt16Order12ToZMQ )
 TEST_F( DataTest, ConvertUInt16Order21ToZMQNullValue )
 {
     //uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_21_to_zmq( nullptr, buffer, DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_21_to_zmq( nullptr, buffer, ZMQ_BUFFER_SIZE_UINT16 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -284,9 +284,9 @@ TEST_F( DataTest, ConvertUInt16Order21ToZMQNullValue )
 TEST_F( DataTest, ConvertUInt16Order21ToZMQNullBuffer )
 {
     uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_21_to_zmq( &( value ), nullptr, DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint16_21_to_zmq( &( value ), nullptr, ZMQ_BUFFER_SIZE_UINT16 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -298,7 +298,7 @@ TEST_F( DataTest, ConvertUInt16Order21ToZMQNullBuffer )
 TEST_F( DataTest, ConvertUInt16Order21ToZMQBadBufferSize )
 {
     uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
     EXPECT_EQ( 0U, ZMBQData::Convert_uint16_21_to_zmq( &( value ), buffer, 2U ) );
 
@@ -312,9 +312,9 @@ TEST_F( DataTest, ConvertUInt16Order21ToZMQBadBufferSize )
 TEST_F( DataTest, ConvertUInt16Order21ToZMQ )
 {
     uint16_t value = 0x1234;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT16 ] = { 0 };
 
-    EXPECT_EQ( DATA_TYPE_RAW_SIZE + sizeof( uint16_t ), ZMBQData::Convert_uint16_21_to_zmq( &( value ), buffer, DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) ) );
+    EXPECT_EQ( ZMQ_BUFFER_SIZE_UINT16, ZMBQData::Convert_uint16_21_to_zmq( &( value ), buffer, ZMQ_BUFFER_SIZE_UINT16 ) );
 
     EXPECT_EQ( ( uint8_t ) DATA_TYPE_UINT16, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -327,9 +327,9 @@ TEST_F( DataTest, ConvertUInt16Order21ToZMQ )
 TEST_F( DataTest, ConvertUInt32Order1234ToZMQNullValue )
 {
     //uint32_t value = 0x12345678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_1234_to_zmq( nullptr, buffer, DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_1234_to_zmq( nullptr, buffer, ZMQ_BUFFER_SIZE_UINT32 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -343,9 +343,9 @@ TEST_F( DataTest, ConvertUInt32Order1234ToZMQNullValue )
 TEST_F( DataTest, ConvertUInt32Order1234ToZMQNullBuffer )
 {
     uint32_t value = 0x12345678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_1234_to_zmq( &( value ), nullptr, DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_1234_to_zmq( &( value ), nullptr, ZMQ_BUFFER_SIZE_UINT32 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -359,7 +359,7 @@ TEST_F( DataTest, ConvertUInt32Order1234ToZMQNullBuffer )
 TEST_F( DataTest, ConvertUInt32Order1234ToZMQBadBufferSize )
 {
     uint32_t value = 0x12345678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
     EXPECT_EQ( 0U, ZMBQData::Convert_uint32_1234_to_zmq( &( value ), buffer, 2U ) );
 
@@ -375,9 +375,9 @@ TEST_F( DataTest, ConvertUInt32Order1234ToZMQBadBufferSize )
 TEST_F( DataTest, ConvertUInt32Order1234ToZMQ )
 {
     uint32_t value = 0x12345678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
-    EXPECT_EQ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ), ZMBQData::Convert_uint32_1234_to_zmq( &( value ), buffer, DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ) );
+    EXPECT_EQ( ZMQ_BUFFER_SIZE_UINT32, ZMBQData::Convert_uint32_1234_to_zmq( &( value ), buffer, ZMQ_BUFFER_SIZE_UINT32 ) );
 
     EXPECT_EQ( ( uint8_t ) DATA_TYPE_UINT32, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -392,9 +392,9 @@ TEST_F( DataTest, ConvertUInt32Order1234ToZMQ )
 TEST_F( DataTest, ConvertUInt32Order4321ToZMQNullValue )
 {
     //uint32_t value = 0x12345678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_4321_to_zmq( nullptr, buffer, DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_4321_to_zmq( nullptr, buffer, ZMQ_BUFFER_SIZE_UINT32 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -408,9 +408,9 @@ TEST_F( DataTest, ConvertUInt32Order4321ToZMQNullValue )
 TEST_F( DataTest, ConvertUInt32Order4321ToZMQNullBuffer )
 {
     uint32_t value = 0x12345678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
-    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_4321_to_zmq( &( value ), nullptr, DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ) );
+    EXPECT_EQ( 0U, ZMBQData::Convert_uint32_4321_to_zmq( &( value ), nullptr, ZMQ_BUFFER_SIZE_UINT32 ) );
 
     EXPECT_EQ( 0U, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
@@ -424,7 +424,7 @@ TEST_F( DataTest, ConvertUInt32Order4321ToZMQNullBuffer )
 TEST_F( DataTest, ConvertUInt32Order4321ToZMQBadBufferSize )
 {
     uint32_t value = 0x43215678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
     EXPECT_EQ( 0U, ZMBQData::Convert_uint32_4321_to_zmq( &( value ), buffer, 2U ) );
 
@@ -440,9 +440,9 @@ TEST_F( DataTest, ConvertUInt32Order4321ToZMQBadBufferSize )
 TEST_F( DataTest, ConvertUInt32Order4321ToZMQ )
 {
     uint32_t value = 0x12345678;
-    uint8_t buffer[ DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ] = { 0 };
+    uint8_t buffer[ ZMQ_BUFFER_SIZE_UINT32 ] = { 0 };
 
-    EXPECT_EQ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ), ZMBQData::Convert_uint32_4321_to_zmq( &( value ), buffer, DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) ) );
+    EXPECT_EQ( ZMQ_BUFFER_SIZE_UINT32, ZMBQData::Convert_uint32_4321_to_zmq( &( value ), buffer, ZMQ_BUFFER_SIZE_UINT32 ) );
 
     EXPECT_EQ( ( uint8_t ) DATA_TYPE_UINT32, buffer[ 0 ] );
     EXPECT_EQ( 0U, buffer[ 1 ] );
