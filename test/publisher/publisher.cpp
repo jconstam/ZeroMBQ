@@ -101,7 +101,7 @@ static PUBLISHER_PARAMS processArgs( int argc, char* argv[] )
 
 int main( int argc, char *argv[] )
 {
-    processArgs( argc, argv );
+    PUBLISHER_PARAMS pubParams = processArgs( argc, argv );
 
     return 0;
 }

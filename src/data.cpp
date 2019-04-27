@@ -61,7 +61,7 @@ DATA_TYPE ZMBQData::typeFromString( string typeString )
     return type;
 }
 
-ConvertFromZMQFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
+ConvertFromZMQFunc ZMBQData::getConvertFromZMQFunc( DATA_TYPE type, string order )
 {
     switch( type )
     {
@@ -84,6 +84,33 @@ ConvertFromZMQFunc ZMBQData::getConversionFunc( DATA_TYPE type, string order )
             else
             {
                 return &( Convert_zmq_to_uint16_12 );
+            }
+            break;
+    }
+}
+ConvertToZMQFunc ZMBQData::getConvertToZMQFunc( DATA_TYPE type, string order )
+{
+    switch( type )
+    {
+        case( DATA_TYPE_UINT32 ):
+            if( order.compare( "4321" ) == 0 )
+            {
+                return &( Convert_uint32_4321_to_zmq );
+            }
+            else
+            {
+                return &( Convert_uint32_1234_to_zmq );
+            }
+            break;
+        case( DATA_TYPE_UINT16 ):
+        default:
+            if( order.compare( "21" ) == 0 )
+            {
+                return &( Convert_uint16_21_to_zmq );
+            }
+            else
+            {
+                return &( Convert_uint16_12_to_zmq );
             }
             break;
     }

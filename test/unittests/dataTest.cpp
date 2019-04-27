@@ -23,14 +23,23 @@ TEST_F( DataTest, TypeFromString )
     EXPECT_EQ( DATA_TYPE_UINT16, ZMBQData::typeFromString( "dummy" ) );
 }
 
-TEST_F( DataTest, GetConversionFunc )
+TEST_F( DataTest, getConvertFromZMQFunc )
 {
-    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint32_4321 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT32, "4321" ) );
-    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint32_1234 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT32, "1234" ) );
-    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint32_1234 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT32, "dummy" ) );
-    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint16_21 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT16, "21" ) );
-    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint16_12 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT16, "12" ) );
-    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint16_12 ), ZMBQData::getConversionFunc( DATA_TYPE_UINT16, "dummy" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint32_4321 ), ZMBQData::getConvertFromZMQFunc( DATA_TYPE_UINT32, "4321" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint32_1234 ), ZMBQData::getConvertFromZMQFunc( DATA_TYPE_UINT32, "1234" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint32_1234 ), ZMBQData::getConvertFromZMQFunc( DATA_TYPE_UINT32, "dummy" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint16_21 ), ZMBQData::getConvertFromZMQFunc( DATA_TYPE_UINT16, "21" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint16_12 ), ZMBQData::getConvertFromZMQFunc( DATA_TYPE_UINT16, "12" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_zmq_to_uint16_12 ), ZMBQData::getConvertFromZMQFunc( DATA_TYPE_UINT16, "dummy" ) );
+}
+TEST_F( DataTest, getConvertToZMQFunc )
+{
+    EXPECT_EQ( &( ZMBQData::Convert_uint32_4321_to_zmq ), ZMBQData::getConvertToZMQFunc( DATA_TYPE_UINT32, "4321" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint32_1234_to_zmq ), ZMBQData::getConvertToZMQFunc( DATA_TYPE_UINT32, "1234" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint32_1234_to_zmq ), ZMBQData::getConvertToZMQFunc( DATA_TYPE_UINT32, "dummy" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint16_21_to_zmq ), ZMBQData::getConvertToZMQFunc( DATA_TYPE_UINT16, "21" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint16_12_to_zmq ), ZMBQData::getConvertToZMQFunc( DATA_TYPE_UINT16, "12" ) );
+    EXPECT_EQ( &( ZMBQData::Convert_uint16_12_to_zmq ), ZMBQData::getConvertToZMQFunc( DATA_TYPE_UINT16, "dummy" ) );
 }
 
 TEST_F( DataTest, ConvertZMQToUInt16Order12InvalidBuffer )

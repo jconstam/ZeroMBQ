@@ -40,7 +40,8 @@ class ZMBQData
     public:
         static DATA_TYPE typeFromString( string typeString );
 
-        static ConvertFromZMQFunc getConversionFunc( DATA_TYPE type, string order );
+        static ConvertFromZMQFunc getConvertFromZMQFunc( DATA_TYPE type, string order );
+        static ConvertToZMQFunc getConvertToZMQFunc( DATA_TYPE type, string order );
 
         static bool Convert_zmq_to_uint16_12( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
         static bool Convert_zmq_to_uint16_21( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
