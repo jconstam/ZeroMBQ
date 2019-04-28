@@ -19,3 +19,6 @@ jobs:
     - stage: build
       name: "Build Binary"
       script: make -j
+
+after_success:
+  cd scripts && ./automerge.sh $USERNAME $PASSWORD
