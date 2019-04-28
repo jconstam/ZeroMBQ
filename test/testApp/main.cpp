@@ -8,7 +8,16 @@ int main( int argc, char *argv[] )
 { 
     ZeroMBQConfig config;
 
-    config.parseConfig( "/mnt/c/Users/Juventas/Documents/Development/ZeroMBQ/test/test.json" );
+    if( argc != 2 )
+    {
+        cerr << "Usage: " << argv[ 0 ] << " <configFile>.\n" << endl;
+        exit( EXIT_FAILURE );
+    }
+    else if( !config.parseConfig( argv[ 1 ] ) )
+    {
+        cerr << "Could not parse config file." << endl;
+        exit( EXIT_FAILURE );
+    }
 
-    return 0;
+    exit( EXIT_SUCCESS );
 }
