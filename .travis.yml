@@ -2,9 +2,6 @@ language: cpp
 compiler: gcc
 dist: xenial
 
-env:
-  - secure: "CPzSfnpQPmePIJzh9WmPEoGdGwvn2Ui+qaI1nuxWWeElkNVuqhsMpwplCr/ueEpn/rBRBSz0msnlObkzhA4vsZ060HAGvGPOTDLc27gutUChstntKJnJ6wFZ+pIDvi00ysjIEXbWAL3WJHfXO1cUI/0BArt81jhmC+5ep0/7EAvDqvCpTDQPssI/A3EJkdCqmr9D7XpDwqvNl5uexZ8Az5URaPGs41tmvySFf1RQEudLXQpGBXJWNUnHqP16WefQoEVVfzMzwzjUxbNo+QSpRAwjZVcritvRbC4LEroKzB66hwrZFBNgreyvQuWvcPJxQKZnl1FRxdrZf7x52+J/ai1V3CjKZvELHlYA9o0CTiJa79zyBe4QDpYVcsgbosV1lJhbswr9mQXJ7Nqz253zxssxrVojm3KKqSFq+LMrlD1OHnP5lj/5clowiessfLF6eARxYSNzIT0glYuJreKx7ClGThl6wEF9yHvwSY1FuBM2RH3zz4Z50+dadPYQUtNWxxVUoTNt/Joe5EfZwS8D57tfNoxOvkXX5RY6y84ilt4646Wv8VgrFn0W+B/DmhyfejiGjYlR18G2Lfsi6CNAQwMMFNY7NF/DKU7sbYnUwP7CoYrPlHw/Rnv/CIbuysc+vpEHJi/mqUOXYbpdG76qIxWqCYx5SYVhMZ3Rl29VgQc="
-
 addons:
   apt:
     packages:
@@ -22,8 +19,3 @@ jobs:
     - stage: build
       name: "Build Binary"
       script: make -j
-
-after_success:
-  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
-  - "chmod a+x /tmp/travis-automerge"
-  - "BRANCHES_TO_MERGE_REGEX='develop' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=jconstam/ZeroMBQ /tmp/travis-automerge"
