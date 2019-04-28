@@ -15,7 +15,7 @@ build:
 
 .PHONY: test
 test: build_unittests
-	cd ${OUTPUT_TEST_PATH} && ctest
+	cd ${OUTPUT_TEST_PATH} && ctest --output-on-failure
 
 .PHONY: unittests
 unittests: build_unittests

@@ -24,7 +24,7 @@ void ZeroMBQSlave::ProcessNewData( string tag, void* data, uint32_t dataSize )
     {
         ZeroMBQDataItem* dataItem = m_dataLookup[ tag ];
 
-        if( ! dataItem->getConvertFunc( )( data, m_modbusData.data( ), dataItem->getAddress( ), dataSize ) )
+        if( ! dataItem->convertFromZMQ( data, m_modbusData.data( ), dataItem->getAddress( ), dataSize ) )
         {
             
         }
