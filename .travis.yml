@@ -15,7 +15,7 @@ jobs:
   include:
     - stage: test
       name: "Unit Tests"
-      script: make -j unittests
+      script: make -j test
     - stage: build
       name: "Build Binary"
       script: make -j

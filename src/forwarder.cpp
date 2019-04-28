@@ -14,6 +14,7 @@ void ZMQForwarder::start( int subPort, int pubPort, string protocol = "tcp" )
     forwarderThread = thread( ZMQForwarder::forwarderTask, subPort, pubPort, protocol );
 }
 
+// https://netmq.readthedocs.io/en/latest/xpub-xsub/
 void ZMQForwarder::forwarderTask( int subPort, int pubPort, string protocol )
 {
     string subEndpoint = protocol + "://*" + to_string( subPort );
