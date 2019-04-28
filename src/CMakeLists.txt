@@ -12,6 +12,7 @@ set( SOURCES
     ${PROJECT_SOURCE_DIR}/data.cpp
     ${PROJECT_SOURCE_DIR}/dataItem.cpp
     ${PROJECT_SOURCE_DIR}/slave.cpp
+    ${PROJECT_SOURCE_DIR}/forwarder.cpp
 )
 
 find_package( jsoncpp REQUIRED )
