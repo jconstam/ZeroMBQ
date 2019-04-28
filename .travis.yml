@@ -21,4 +21,4 @@ jobs:
       script: make -j
 
 after_success:
-  cd scripts && ./automerge.sh $USERNAME $PASSWORD
+  cd scripts && chmod +x automerge.sh && ./automerge.sh $USERNAME $PASSWORD
