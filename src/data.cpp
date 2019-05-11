@@ -49,7 +49,11 @@ DATA_TYPE ZMBQData::typeFromString( string typeString )
 {
     DATA_TYPE type;
 
-    if( typeString.compare( DATATYPE_STRING_UINT32 ) == 0 )
+    if( typeString.compare( DATATYPE_STRING_FLOAT ) == 0 )
+    {
+        type = DATA_TYPE_FLOAT;
+    }
+    else if( typeString.compare( DATATYPE_STRING_UINT32 ) == 0 )
     {
         type = DATA_TYPE_UINT32;
     }
@@ -219,4 +223,28 @@ size_t ZMBQData::Convert_uint32_4321_to_zmq( void* value, void* buffer, uint32_t
     SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 3U, value, 3 );
 
     return DATA_TYPE_RAW_SIZE + sizeof( uint32_t );
+}
+size_t ZMBQData::Convert_float_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize )
+{
+    VALIDATE_TO_ZMQ_PARAMS( value, buffer, bufferSize, sizeof( float ) );
+
+    ( ( uint32_t* ) buffer )[ 0 ] = DATA_TYPE_FLOAT;
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 0U, value, 3 );
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 1U, value, 2 );
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 2U, value, 1 );
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 3U, value, 0 );
+
+    return DATA_TYPE_RAW_SIZE + sizeof( float );
+}
+size_t ZMBQData::Convert_float_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize )
+{
+    VALIDATE_TO_ZMQ_PARAMS( value, buffer, bufferSize, sizeof( float ) );
+
+    ( ( uint32_t* ) buffer )[ 0 ] = DATA_TYPE_FLOAT;
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 0U, value, 0 );
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 1U, value, 1 );
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 2U, value, 2 );
+    SET_BUFFER( ( uint8_t* ) buffer, DATA_TYPE_RAW_SIZE + 3U, value, 3 );
+
+    return DATA_TYPE_RAW_SIZE + sizeof( float );
 }

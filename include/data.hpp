@@ -11,10 +11,12 @@ using namespace std;
 #define DATA_TYPE_RAW_SIZE          ( sizeof( uint32_t ) )
 #define ZMQ_BUFFER_SIZE_UINT16      ( DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) )
 #define ZMQ_BUFFER_SIZE_UINT32      ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) )
+#define ZMQ_BUFFER_SIZE_FLOAT       ( DATA_TYPE_RAW_SIZE + sizeof( float ) )
 #define ZMQ_BUFFER_SIZE_MAX         ( max( ZMQ_BUFFER_SIZE_UINT32, ZMQ_BUFFER_SIZE_UINT16 ) )
 
 #define DATATYPE_STRING_UINT16      "uint16"
 #define DATATYPE_STRING_UINT32      "uint32"
+#define DATATYPE_STRING_FLOAT       "float"
 
 typedef bool (*ConvertFromZMQFunc)( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
 typedef size_t (*ConvertToZMQFunc)( void* value, void* buffer, uint32_t bufferSize );
@@ -22,7 +24,8 @@ typedef size_t (*ConvertToZMQFunc)( void* value, void* buffer, uint32_t bufferSi
 typedef enum
 {
     DATA_TYPE_UINT16,
-    DATA_TYPE_UINT32
+    DATA_TYPE_UINT32,
+    DATA_TYPE_FLOAT
 } DATA_TYPE;
 
 typedef struct
@@ -36,6 +39,12 @@ typedef struct
     DATA_TYPE type;
     uint32_t value;
 } RAWDATA_UINT32;
+
+typedef struct
+{
+    DATA_TYPE type;
+    float value;
+} RAWDATA_FLOAT;
 
 class ZMBQData
 {
@@ -55,6 +64,8 @@ class ZMBQData
         static size_t Convert_uint16_21_to_zmq( void* value, void* buffer, uint32_t bufferSize );        
         static size_t Convert_uint32_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize );
         static size_t Convert_uint32_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize );
+        static size_t Convert_float_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize );
+        static size_t Convert_float_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize );
 };
 
 #endif

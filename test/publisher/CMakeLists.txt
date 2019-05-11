@@ -33,10 +33,26 @@ add_test( publisher_noValueUInt32 ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -
 set_tests_properties( publisher_noValueUInt32 PROPERTIES WILL_FAIL TRUE )
 set_tests_properties( publisher_noValueUInt32 PROPERTIES FAIL_REGULAR_EXPRESSION "Error: data value not specified.\nUse \"-v\"." )
 
-add_test( publisher_badUInt16 ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y uint16 -v 12345678 )
-set_tests_properties( publisher_badUInt16 PROPERTIES WILL_FAIL TRUE )
-set_tests_properties( publisher_badUInt16 PROPERTIES FAIL_REGULAR_EXPRESSION "Error: could not parse value \"12345678\" as a uint16\n" )
+add_test( publisher_noValueFloat ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y float )
+set_tests_properties( publisher_noValueFloat PROPERTIES WILL_FAIL TRUE )
+set_tests_properties( publisher_noValueFloat PROPERTIES FAIL_REGULAR_EXPRESSION "Error: data value not specified.\nUse \"-v\"." )
 
-add_test( publisher_badUInt32 ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y uint32 -v 1234567887654321 )
-set_tests_properties( publisher_badUInt32 PROPERTIES WILL_FAIL TRUE )
-set_tests_properties( publisher_badUInt32 PROPERTIES FAIL_REGULAR_EXPRESSION "Error: could not parse value \"1234567887654321\" as a uint32\n" )
+add_test( publisher_invalidUInt16 ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y uint16 -v invalid )
+set_tests_properties( publisher_invalidUInt16 PROPERTIES WILL_FAIL TRUE )
+set_tests_properties( publisher_invalidUInt16 PROPERTIES FAIL_REGULAR_EXPRESSION "Error: \"invalid\" is not a valid uint16\n" )
+
+add_test( publisher_outOfRangeUInt16 ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y uint16 -v 123456 )
+set_tests_properties( publisher_outOfRangeUInt16 PROPERTIES WILL_FAIL TRUE )
+set_tests_properties( publisher_outOfRangeUInt16 PROPERTIES FAIL_REGULAR_EXPRESSION "Error: could not parse value \"123456\" as a uint16\n" )
+
+add_test( publisher_invalidUInt32 ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y uint32 -v invalid )
+set_tests_properties( publisher_invalidUInt32 PROPERTIES WILL_FAIL TRUE )
+set_tests_properties( publisher_invalidUInt32 PROPERTIES FAIL_REGULAR_EXPRESSION "Error: \"invalid\" is not a valid uint32\n" )
+
+add_test( publisher_outOfRangeUInt32 ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y uint32 -v 1234567887654321 )
+set_tests_properties( publisher_outOfRangeUInt32 PROPERTIES WILL_FAIL TRUE )
+set_tests_properties( publisher_outOfRangeUInt32 PROPERTIES FAIL_REGULAR_EXPRESSION "Error: could not parse value \"1234567887654321\" as a uint32\n" )
+
+add_test( publisher_invalidFloat ${PUBLISHER_PROJECT_NAME} -p 1234 -t TestTag -y float -v invalid )
+set_tests_properties( publisher_invalidFloat PROPERTIES WILL_FAIL TRUE )
+set_tests_properties( publisher_invalidFloat PROPERTIES FAIL_REGULAR_EXPRESSION "Error: \"invalid\" is not a valid float\n" )

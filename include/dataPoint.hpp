@@ -7,15 +7,17 @@ using namespace std;
 
 #include "data.hpp"
 
+template <typename T>
 class ZMBQDataPoint
 {
     public:
         ZMBQDataPoint( );
-        ZMBQDataPoint( string, string );
+        ZMBQDataPoint( string name, T value );
 
     private:
         string m_name;
         DATA_TYPE m_type;
+        T m_value;
 };
 
 #endif

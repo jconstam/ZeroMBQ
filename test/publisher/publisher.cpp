@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cfloat>
 
 #include <unistd.h>
 #include <errno.h>
@@ -17,7 +18,13 @@ using namespace std;
 
 #define CHECK_VALUE_RANGE( typeString, maxValue, minValue, type, typeName, value ) \
     { \
-        long int testValue = strtol( ( typeString ).c_str( ), NULL, 0 ); \
+        char* endPtr; \
+        long int testValue = strtol( ( typeString ).c_str( ), &( endPtr ), 0 ); \
+        if( endPtr == ( typeString ).c_str( ) ) \
+        { \
+            fprintf( stderr, "Error: \"%s\" is not a valid %s\n", typeString.c_str( ), typeName ); \
+            exit( EXIT_FAILURE ); \
+        } \
         if( testValue > ( maxValue ) || testValue < ( minValue ) ) \
         { \
             fprintf( stderr, "Error: Failed to parse value \"%s\" as a %s\n", typeString.c_str( ), typeName ); \
@@ -37,6 +44,7 @@ typedef struct
 
     uint16_t value_uint16;
     uint32_t value_uint32;
+    float value_float;
 } PUBLISHER_PARAMS;
 
 typedef struct
@@ -103,6 +111,9 @@ static PUBLISHER_PARAMS processArgs( int argc, char* argv[] )
         case DATA_TYPE_UINT32:
             CHECK_VALUE_RANGE( typeString, UINT32_MAX, 0, uint32_t, "uint32", params.value_uint32 );
             break;
+        case DATA_TYPE_FLOAT:
+            CHECK_VALUE_RANGE( typeString, FLT_MAX, FLT_MIN, float, "float", params.value_float );
+            break;
     }
 
     return params;
@@ -112,6 +123,8 @@ static size_t buildPacket( PUBLISHER_PARAMS* pubParams, uint8_t* buffer )
 {
     switch( pubParams->type )
     {
+        case( DATA_TYPE_FLOAT ):
+            return ZMBQData::Convert_float_4321_to_zmq( &( pubParams->value_float ), buffer, ZMQ_BUFFER_SIZE_FLOAT );
         case( DATA_TYPE_UINT32 ):
             return ZMBQData::Convert_uint32_4321_to_zmq( &( pubParams->value_uint32 ), buffer, ZMQ_BUFFER_SIZE_UINT32 );
         case( DATA_TYPE_UINT16 ):

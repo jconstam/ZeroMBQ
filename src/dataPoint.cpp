@@ -1,12 +1,19 @@
 #include "dataPoint.hpp"
 
-ZMBQDataPoint::ZMBQDataPoint( ) : ZMBQDataPoint( "Unknown", "uint16" )
+// https://stackoverflow.com/questions/8752837/undefined-reference-to-template-class-constructor
+template class ZMBQDataPoint<uint16_t>;
+template class ZMBQDataPoint<uint32_t>;
+template class ZMBQDataPoint<float>;
+
+template <typename T>
+ZMBQDataPoint<T>::ZMBQDataPoint( ) : ZMBQDataPoint( "Unknown", 0 )
 {
     
 }
 
-ZMBQDataPoint::ZMBQDataPoint( string name, string type )
+template <typename T>
+ZMBQDataPoint<T>::ZMBQDataPoint( string name, T value )
 {
     m_name = name;
-    m_type = ZMBQData::typeFromString( type );
+    m_value = value;
 }
