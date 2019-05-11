@@ -10,8 +10,7 @@ project( ${PROJECT_NAME_LIBRARY} )
 set( SOURCES 
     ${PROJECT_SOURCE_DIR}/config.cpp
     ${PROJECT_SOURCE_DIR}/data.cpp
-    ${PROJECT_SOURCE_DIR}/dataItem.cpp
-    ${PROJECT_SOURCE_DIR}/slave.cpp
+    ${PROJECT_SOURCE_DIR}/dataPoint.cpp
 )
 
 find_package( jsoncpp REQUIRED )

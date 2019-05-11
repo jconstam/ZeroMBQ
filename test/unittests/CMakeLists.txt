@@ -17,10 +17,10 @@ add_subdirectory( ${CMAKE_CURRENT_BINARY_DIR}/googletest-src ${CMAKE_CURRENT_BIN
 
 set( UNITTEST_SOURCES
     ${SOURCES_ROOT}/data.cpp
-    ${SOURCES_ROOT}/dataItem.cpp
+    ${SOURCES_ROOT}/dataPoint.cpp
 
     ${UNITTEST_ROOT}/dataTest.cpp
-    ${UNITTEST_ROOT}/dataItemTest.cpp
+    ${UNITTEST_ROOT}/dataPointTest.cpp
 )
 
 set( UNITTEST_PROJECT_NAME "ZeroMBQTest" )

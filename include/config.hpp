@@ -5,22 +5,22 @@ using namespace std;
 
 #include <string>
 #include <vector>
+#include <map>
 
 #include "jsoncpp/json/json.h"
 
-#include "slave.hpp"
+#include "dataPoint.hpp"
 
-class ZeroMBQConfig
+class ZMBQConfig
 {
     public:
-        ZeroMBQConfig( );
+        ZMBQConfig( );
         bool parseConfig( string filePath );
 
     private:
-        map<uint16_t, ZeroMBQSlave> m_slaveList;
+        void parseDataPoints( const Json::Value dataPoints );
 
-        void parseSlaveConfig( const Json::Value slaves );
-        ZeroMBQSlave* getSlave( uint16_t deviceID );
+        map<string, ZMBQDataPoint> m_dataPoints;
 };
 
 #endif

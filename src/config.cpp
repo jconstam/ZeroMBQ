@@ -1,15 +1,15 @@
-#include <fstream>
+    #include <fstream>
 #include <iostream>
 
 #include "config.hpp"
-#include "dataItem.hpp"
+#include "dataPoint.hpp"
 
-ZeroMBQConfig::ZeroMBQConfig( )
+ZMBQConfig::ZMBQConfig( )
 {
 
 }
 
-bool ZeroMBQConfig::parseConfig( string filePath )
+bool ZMBQConfig::parseConfig( string filePath )
 {
     Json::Value root;
     Json::Reader reader;
@@ -17,38 +17,20 @@ bool ZeroMBQConfig::parseConfig( string filePath )
     ifstream file( filePath );
     file >> root;
 
-    parseSlaveConfig( root[ "slaves" ] );
+    parseDataPoints( root[ "dataPoints" ] );
 
     return true;
 }
 
-void ZeroMBQConfig::parseSlaveConfig( const Json::Value slaves )
+void ZMBQConfig::parseDataPoints( const Json::Value dataPoints )
 {
-    for ( unsigned int slaveIndex = 0; slaveIndex < slaves.size(); slaveIndex++ )
-    {
-        ZeroMBQSlave currSlave( slaves[ slaveIndex ][ "deviceID" ].asUInt( ) );
-        Json::Value currSlaveData = slaves[ slaveIndex ];
-        for ( unsigned int dataIndex = 0; dataIndex < currSlaveData[ "data" ].size(); dataIndex++ )
-        {
-            Json::Value currData = currSlaveData[ "data" ][ dataIndex ];
+    m_dataPoints.clear( );
 
-            currSlave.AddDataItem( currData[ "tag" ].asString( ), 
-                new ZeroMBQDataItem( currData[ "address" ].asUInt( ), currData[ "order" ].asString( ), currData[ "tag" ].asString( ), currData[ "type" ].asString( ) ) );
-        }
-
-        m_slaveList[ currSlave.GetDeviceID( ) ] = currSlave;
-    }
-}
-
-ZeroMBQSlave* ZeroMBQConfig::getSlave( uint16_t deviceID )
-{
-    if( m_slaveList.find( deviceID ) != m_slaveList.end( ) )
+    for ( unsigned int dataPointIndex = 0; dataPointIndex < dataPoints.size(); dataPointIndex++ )
     {
-        return nullptr;
+        string name = dataPoints[ dataPointIndex ][ "name" ].asString( );
+        string type = dataPoints[ dataPointIndex ][ "type" ].asString( );
+
+        m_dataPoints[ name ] = ZMBQDataPoint( name, type );
     }
-    else
-    {
-        return &( m_slaveList[ deviceID ] );
-    }
-    
 }

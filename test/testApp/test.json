@@ -1,25 +1,69 @@
 {
-    "slaves":[
+    "dataPoints": [
         {
-            "deviceID": 1,
-            "data":[
+            "name": "Modbus.Data.1",
+            "type": "uint16"
+        },
+        {
+            "name": "Modbus.Data.2",
+            "type": "uint32"
+        }
+    ],
+    "maps": [
+        {
+            "name": "Map1",
+            "regCount": 6,
+            "dataList":
+            [
                 {
-                    "tag": "Modbus.Data.1",
-                    "type": "uint16",
-                    "order": "12",
-                    "address": 0
+                    "baseAddr": 0,
+                    "dataPoint": "Modbus.Data.1",
+                    "order": "12"
                 },
                 {
-                    "tag": "Modbus.Data.2",
-                    "type": "uint16",
-                    "order": "21",
-                    "address": 1
+                    "baseAddr": 1,
+                    "dataPoint": "Modbus.Data.1",
+                    "order": "21"
                 },
                 {
-                    "tag": "Modbus.Data.3",
-                    "type": "uint32",
-                    "order": "1234",
-                    "address": 2
+                    "baseAddr": 2,
+                    "dataPoint": "Modbus.Data.2",
+                    "order": "1234"
+                },
+                {
+                    "baseAddr": 4,
+                    "dataPoint": "Modbus.Data.2",
+                    "order": "4321"
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "name": "TCPConn1",
+            "type": "TCP_Eth",
+            "port": 502
+        },
+        {
+            "name": "SerConn1",
+            "type": "RTU",
+            "baud": 57600,
+            "dataBits": 8,
+            "parity": "none",
+            "stopBits": "1"
+        }
+    ],
+    "slaves": [
+        {
+            "name": "Slave1",
+            "connections": [
+                "TCPConn1",
+                "SerConn1"
+            ],
+            "maps": [
+                {
+                    "name": "Map1",
+                    "deviceID": 1
                 }
             ]
         }
