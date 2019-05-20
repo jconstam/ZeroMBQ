@@ -10,6 +10,7 @@ using namespace std;
 #include "jsoncpp/json/json.h"
 
 #include "dataPoint.hpp"
+#include "modbusMap.hpp"
 
 class ZMBQConfig
 {
@@ -22,6 +23,7 @@ class ZMBQConfig
         void parseMaps( const Json::Value maps );
 
         map<string, ZMBQDataPoint> m_dataPoints;
+        map<string, ZMBQMap> m_maps;
 };
 
 #endif

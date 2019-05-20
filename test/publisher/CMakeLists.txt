@@ -4,10 +4,14 @@ set( PUBLISHER_SOURCES
     ${PUBLISHER_ROOT}/publisher.cpp
 )
 
+find_package( PkgConfig REQUIRED )
+pkg_check_modules( JSONCPP REQUIRED jsoncpp )
+pkg_check_modules( LIBMODBUS REQUIRED libmodbus )
+
 set( PUBLISHER_PROJECT_NAME "Publisher" )
-include_directories( ${PUBLISHER_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
+include_directories( ${PUBLISHER_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include ${JSONCPP_INCLUDE_DIRS} ${LIBMODBUS_INCLUDE_DIRS} )
 add_executable( ${PUBLISHER_PROJECT_NAME} ${PUBLISHER_SOURCES} )
-target_link_libraries( ${PUBLISHER_PROJECT_NAME} zmq )
+target_link_libraries( ${PUBLISHER_PROJECT_NAME} zmq jsoncpp modbus )
 
 add_test( publisher_noTCPPort ${PUBLISHER_PROJECT_NAME} )
 set_tests_properties( publisher_noTCPPort PROPERTIES WILL_FAIL TRUE )

@@ -3,7 +3,6 @@
 
 #include "config.hpp"
 #include "dataPoint.hpp"
-#include "modbusMap.hpp"
 
 ZMBQConfig::ZMBQConfig( )
 {
@@ -38,6 +37,8 @@ void ZMBQConfig::parseDataPoints( const Json::Value dataPoints )
 
 void ZMBQConfig::parseMaps( const Json::Value maps )
 {
+    m_maps.clear( );
+
     for ( unsigned int mapIndex = 0; mapIndex < maps.size(); mapIndex++ )
     {
         Json::Value currMapData = maps[ mapIndex ];
@@ -65,5 +66,7 @@ void ZMBQConfig::parseMaps( const Json::Value maps )
                 m_dataPoints[ currData[ "dataPoint" ].asString( ) ].addDataLocation( currMap.GetDataPointer_HoldingRegs( currData[ "baseAddr" ].asUInt( ) ) );
             }
         }
+
+        m_maps[ currMap.GetName( ) ] = currMap;
     }
 }

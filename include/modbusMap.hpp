@@ -10,8 +10,10 @@ using namespace std;
 class ZMBQMap
 {
     public:
-        ZMBQMap( );
+        ZMBQMap( ) : ZMBQMap( "Unknown" ){};
         ZMBQMap( string name );
+
+        string GetName( );
 
         void InitMap_ExpandMap( uint32_t address, uint32_t count );
         void InitMap_Generate( );

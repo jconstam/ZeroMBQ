@@ -11,6 +11,11 @@ ZMBQMap::ZMBQMap( string name )
     m_size = 0U;
 }
 
+string ZMBQMap::GetName( )
+{
+    return m_name;
+}
+
 void ZMBQMap::InitMap_ExpandMap( uint32_t address, uint32_t count )
 {
     m_baseAddress = min( m_baseAddress, address );
