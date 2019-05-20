@@ -3,6 +3,7 @@
 
 #include "config.hpp"
 #include "dataPoint.hpp"
+#include "modbusMap.hpp"
 
 ZMBQConfig::ZMBQConfig( )
 {
@@ -18,6 +19,7 @@ bool ZMBQConfig::parseConfig( string filePath )
     file >> root;
 
     parseDataPoints( root[ "dataPoints" ] );
+    parseMaps( root[ "maps" ] );
 
     return true;
 }
@@ -30,18 +32,38 @@ void ZMBQConfig::parseDataPoints( const Json::Value dataPoints )
     {
         string name = dataPoints[ dataPointIndex ][ "name" ].asString( );
 
-        switch( ZMBQData::typeFromString( dataPoints[ dataPointIndex ][ "type" ].asString( ) ) )
+        m_dataPoints[ name ] = ZMBQDataPoint( name, dataPoints[ dataPointIndex ][ "type" ].asString( ) );
+    }
+}
+
+void ZMBQConfig::parseMaps( const Json::Value maps )
+{
+    for ( unsigned int mapIndex = 0; mapIndex < maps.size(); mapIndex++ )
+    {
+        Json::Value currMapData = maps[ mapIndex ];
+
+        ZMBQMap currMap = ZMBQMap( currMapData[ "name" ].asString( ) );
+
+        Json::Value dataList = currMapData[ "dataList" ];
+        for ( unsigned int dataPointIndex = 0; dataPointIndex < dataList.size(); dataPointIndex++ )
         {
-            case( DATA_TYPE_FLOAT ):
-                m_dataPoints[ name ] = new ZMBQDataPoint<float>( name, 0.0f );
-                break;
-            case( DATA_TYPE_UINT32 ):
-                m_dataPoints[ name ] = new ZMBQDataPoint<uint32_t>( name, 0U );
-                break;
-            case( DATA_TYPE_UINT16 ):
-            default:
-                m_dataPoints[ name ] = new ZMBQDataPoint<uint16_t>( name, 0U );
-                break;
+            Json::Value currData = dataList[ dataPointIndex ];
+            if( m_dataPoints.find( currData[ "dataPoint" ].asString( ) ) != m_dataPoints.end( ) )
+            {
+                currMap.InitMap_ExpandMap( currData[ "baseAddr" ].asUInt( ), m_dataPoints[ currData[ "dataPoint" ].asString( ) ].size_bytes( ) );
+            }
+        }
+
+        currMap.InitMap_Generate( );
+        
+        for ( unsigned int dataPointIndex = 0; dataPointIndex < dataList.size(); dataPointIndex++ )
+        {
+            Json::Value currData = dataList[ dataPointIndex ];
+            if( m_dataPoints.find( currData[ "dataPoint" ].asString( ) ) != m_dataPoints.end( ) )
+            {
+                m_dataPoints[ currData[ "dataPoint" ].asString( ) ].addDataLocation( currMap.GetDataPointer_InputRegs( currData[ "baseAddr" ].asUInt( ) ) );
+                m_dataPoints[ currData[ "dataPoint" ].asString( ) ].addDataLocation( currMap.GetDataPointer_HoldingRegs( currData[ "baseAddr" ].asUInt( ) ) );
+            }
         }
     }
 }

@@ -124,11 +124,14 @@ static size_t buildPacket( PUBLISHER_PARAMS* pubParams, uint8_t* buffer )
     switch( pubParams->type )
     {
         case( DATA_TYPE_FLOAT ):
-            return ZMBQData::Convert_float_4321_to_zmq( &( pubParams->value_float ), buffer, ZMQ_BUFFER_SIZE_FLOAT );
+            memcpy( &( buffer[ DATA_TYPE_RAW_SIZE ] ), &( pubParams->value_float ), sizeof( float ) );
+            return ZMQ_BUFFER_SIZE_FLOAT;
         case( DATA_TYPE_UINT32 ):
-            return ZMBQData::Convert_uint32_4321_to_zmq( &( pubParams->value_uint32 ), buffer, ZMQ_BUFFER_SIZE_UINT32 );
+            memcpy( &( buffer[ DATA_TYPE_RAW_SIZE ] ), &( pubParams->value_uint32 ), sizeof( uint32_t ) );
+            return ZMQ_BUFFER_SIZE_UINT32;
         case( DATA_TYPE_UINT16 ):
-            return ZMBQData::Convert_uint16_21_to_zmq( &( pubParams->value_uint16 ), buffer, ZMQ_BUFFER_SIZE_UINT16 );
+            memcpy( &( buffer[ DATA_TYPE_RAW_SIZE ] ), &( pubParams->value_uint16 ), sizeof( uint16_t ) );
+            return ZMQ_BUFFER_SIZE_UINT16;
         default:
             return 0;
     }

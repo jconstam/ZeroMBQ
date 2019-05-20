@@ -18,9 +18,6 @@ using namespace std;
 #define DATATYPE_STRING_UINT32      "uint32"
 #define DATATYPE_STRING_FLOAT       "float"
 
-typedef bool (*ConvertFromZMQFunc)( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-typedef size_t (*ConvertToZMQFunc)( void* value, void* buffer, uint32_t bufferSize );
-
 typedef enum
 {
     DATA_TYPE_UINT16,
@@ -51,21 +48,7 @@ class ZMBQData
     private:
     public:
         static DATA_TYPE typeFromString( string typeString );
-
-        static ConvertFromZMQFunc getConvertFromZMQFunc( DATA_TYPE type, string order );
-        static ConvertToZMQFunc getConvertToZMQFunc( DATA_TYPE type, string order );
-
-        static bool Convert_zmq_to_uint16_12( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_zmq_to_uint16_21( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_zmq_to_uint32_4321( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_zmq_to_uint32_1234( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-
-        static size_t Convert_uint16_12_to_zmq( void* value, void* buffer, uint32_t bufferSize );
-        static size_t Convert_uint16_21_to_zmq( void* value, void* buffer, uint32_t bufferSize );        
-        static size_t Convert_uint32_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize );
-        static size_t Convert_uint32_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize );
-        static size_t Convert_float_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize );
-        static size_t Convert_float_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize );
+        static int typeSize( DATA_TYPE type );
 };
 
 #endif

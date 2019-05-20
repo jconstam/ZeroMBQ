@@ -1,19 +1,19 @@
 #include "dataPoint.hpp"
 
-// https://stackoverflow.com/questions/8752837/undefined-reference-to-template-class-constructor
-template class ZMBQDataPoint<uint16_t>;
-template class ZMBQDataPoint<uint32_t>;
-template class ZMBQDataPoint<float>;
-
-template <typename T>
-ZMBQDataPoint<T>::ZMBQDataPoint( ) : ZMBQDataPoint( "Unknown", 0 )
+ZMBQDataPoint::ZMBQDataPoint( ) : ZMBQDataPoint( "Unknown", "uint16" )
 {
     
 }
 
-template <typename T>
-ZMBQDataPoint<T>::ZMBQDataPoint( string name, T value )
+ZMBQDataPoint::ZMBQDataPoint( string name, string typeString )
 {
     m_name = name;
-    m_value = value;
+    m_type = ZMBQData::typeFromString( typeString );
+    m_size = ZMBQData::typeSize( m_type );
+    m_valueArray = ( uint8_t* ) calloc( m_size, sizeof( uint8_t ) );
+}
+
+void ZMBQDataPoint::addDataLocation( void* dataPointer )
+{
+    m_dataLocations.push_back( dataPointer );
 }

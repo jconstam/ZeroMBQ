@@ -19,8 +19,9 @@ class ZMBQConfig
 
     private:
         void parseDataPoints( const Json::Value dataPoints );
+        void parseMaps( const Json::Value maps );
 
-        map<string, void*> m_dataPoints;
+        map<string, ZMBQDataPoint> m_dataPoints;
 };
 
 #endif

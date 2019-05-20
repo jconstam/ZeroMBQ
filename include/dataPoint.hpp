@@ -4,20 +4,29 @@
 using namespace std;
 
 #include <string>
+#include <vector>
 
 #include "data.hpp"
 
-template <typename T>
+using namespace std;
+
 class ZMBQDataPoint
 {
     public:
         ZMBQDataPoint( );
-        ZMBQDataPoint( string name, T value );
+        ZMBQDataPoint( string name, string type );
+
+        int size_bytes( ){ return m_size; };
+        int size_registers( ){ return m_size / sizeof( uint16_t ); };
+
+        void addDataLocation( void* dataPointer );
 
     private:
         string m_name;
         DATA_TYPE m_type;
-        T m_value;
+        int m_size;
+        uint8_t* m_valueArray;
+        vector<void*> m_dataLocations;
 };
 
 #endif
