@@ -14,6 +14,8 @@ using namespace std;
 #define ZMQ_BUFFER_SIZE_FLOAT           ( DATA_TYPE_RAW_SIZE + sizeof( float ) )
 #define ZMQ_BUFFER_SIZE_MAX             ( max( ZMQ_BUFFER_SIZE_UINT32, ZMQ_BUFFER_SIZE_UINT16 ) )
 
+#define ZMQ_MAX_TOPIC_LEN               ( 1024U )
+
 #define DATATYPE_STRING_UINT16          "uint16"
 #define DATATYPE_STRING_UINT32          "uint32"
 #define DATATYPE_STRING_FLOAT           "float"
