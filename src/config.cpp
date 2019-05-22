@@ -30,8 +30,9 @@ void ZMBQConfig::parseDataPoints( const Json::Value dataPoints )
     for ( unsigned int dataPointIndex = 0; dataPointIndex < dataPoints.size(); dataPointIndex++ )
     {
         string name = dataPoints[ dataPointIndex ][ "name" ].asString( );
+        string type = dataPoints[ dataPointIndex ][ "type" ].asString( );
 
-        m_dataPoints[ name ] = ZMBQDataPoint( name, dataPoints[ dataPointIndex ][ "type" ].asString( ) );
+        m_dataPoints[ name ] = ZMBQDataPoint( name, type );
     }
 }
 

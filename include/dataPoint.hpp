@@ -20,12 +20,12 @@ class ZMBQDataPoint
         int size_registers( ){ return m_size / sizeof( uint16_t ); };
 
         void addDataLocation( void* dataPointer );
+        void publish( void* dataMessage );
 
     private:
         string m_name;
         DATA_TYPE m_type;
         int m_size;
-        uint8_t* m_valueArray;
         vector<void*> m_dataLocations;
 };
 
