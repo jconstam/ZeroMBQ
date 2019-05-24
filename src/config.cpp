@@ -25,14 +25,14 @@ bool ZMBQConfig::parseConfig( string filePath )
 
 void ZMBQConfig::parseDataPoints( const Json::Value dataPoints )
 {
-    m_dataPoints.clear( );
+    m_dataPoints = ZMBQDataPointCollection( );
 
     for ( unsigned int dataPointIndex = 0; dataPointIndex < dataPoints.size(); dataPointIndex++ )
     {
         string name = dataPoints[ dataPointIndex ][ "name" ].asString( );
         string type = dataPoints[ dataPointIndex ][ "type" ].asString( );
 
-        m_dataPoints[ name ] = ZMBQDataPoint( name, type );
+        m_dataPoints.addDataPoint( ZMBQDataPoint( name, type ) );
     }
 }
 
@@ -50,7 +50,7 @@ void ZMBQConfig::parseMaps( const Json::Value maps )
         for ( unsigned int dataPointIndex = 0; dataPointIndex < dataList.size(); dataPointIndex++ )
         {
             Json::Value currData = dataList[ dataPointIndex ];
-            if( m_dataPoints.find( currData[ "dataPoint" ].asString( ) ) != m_dataPoints.end( ) )
+            if( m_dataPoints.dataPointExists( currData[ "dataPoint" ].asString( ) ) )
             {
                 currMap.InitMap_ExpandMap( currData[ "baseAddr" ].asUInt( ), m_dataPoints[ currData[ "dataPoint" ].asString( ) ].size_bytes( ) );
             }
@@ -61,7 +61,7 @@ void ZMBQConfig::parseMaps( const Json::Value maps )
         for ( unsigned int dataPointIndex = 0; dataPointIndex < dataList.size(); dataPointIndex++ )
         {
             Json::Value currData = dataList[ dataPointIndex ];
-            if( m_dataPoints.find( currData[ "dataPoint" ].asString( ) ) != m_dataPoints.end( ) )
+            if( m_dataPoints.dataPointExists( currData[ "dataPoint" ].asString( ) ) )
             {
                 m_dataPoints[ currData[ "dataPoint" ].asString( ) ].addDataLocation( currMap.GetDataPointer_InputRegs( currData[ "baseAddr" ].asUInt( ) ) );
                 m_dataPoints[ currData[ "dataPoint" ].asString( ) ].addDataLocation( currMap.GetDataPointer_HoldingRegs( currData[ "baseAddr" ].asUInt( ) ) );

@@ -7,12 +7,14 @@
 
 #include <zmq.hpp>
 
+#include "dataPoint.hpp"
+
 class ZMQSubscriber
 {
     public:
         ZMQSubscriber( int tcpPort );
 
-        void start( std::vector<std::string> subscriptions );
+        void start( std::vector<std::string> subscriptions, ZMBQDataPointCollection dataPoints );
         void stop( );
 
     private:
@@ -23,7 +25,7 @@ class ZMQSubscriber
         void* m_context;
         void* m_subSocket;
 
-        void subThreadFunction( std::vector<std::string> subscriptions );
+        void subThreadFunction( std::vector<std::string> subscriptions, ZMBQDataPointCollection dataPoints );
 };
 
 #endif

@@ -24,10 +24,10 @@ ZMQSubscriber::ZMQSubscriber( int tcpPort )
     m_subSocket = nullptr;
 }
 
-void ZMQSubscriber::start( vector<string> subscriptions )
+void ZMQSubscriber::start( vector<string> subscriptions, ZMBQDataPointCollection dataPoints )
 {
     m_stopRequested = false;
-    m_subThread = thread( &ZMQSubscriber::subThreadFunction, this, subscriptions );
+    m_subThread = thread( &ZMQSubscriber::subThreadFunction, this, subscriptions, dataPoints );
 }
 
 void ZMQSubscriber::stop( )
@@ -41,7 +41,7 @@ void ZMQSubscriber::stop( )
     m_subThread.join( );
 }
 
-void ZMQSubscriber::subThreadFunction( vector<string> subscriptions )
+void ZMQSubscriber::subThreadFunction( vector<string> subscriptions, ZMBQDataPointCollection dataPoints )
 {
     m_subSocket = zmq_socket( m_context, ZMQ_SUB );
 
@@ -52,7 +52,7 @@ void ZMQSubscriber::subThreadFunction( vector<string> subscriptions )
 
     while( m_stopRequested != true )
     {
-        uint8_t topicBuffer[ ZMQ_MAX_TOPIC_LEN ] = { 0 };
+        char topicBuffer[ ZMQ_MAX_TOPIC_LEN ] = { 0 };
         uint8_t dataBuffer[ ZMQ_BUFFER_SIZE_MAX ] = { 0 };
 
         int topicSize = zmq_recv( m_subSocket, topicBuffer, ZMQ_MAX_TOPIC_LEN, 0 );
@@ -69,7 +69,7 @@ void ZMQSubscriber::subThreadFunction( vector<string> subscriptions )
                 break;
             }
 
-
+            dataPoints.publishNewData( string( topicBuffer ), dataBuffer );
         }
     }
 }
