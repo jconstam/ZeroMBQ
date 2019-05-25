@@ -19,8 +19,8 @@ addons:
 jobs:
   include:
     - stage: test
-      name: "Unit Tests"
-      script: make -j unittests
+      name: "Testing"
+      script: make -j test
     - stage: build
       name: "Build Binary"
       script: make -j
