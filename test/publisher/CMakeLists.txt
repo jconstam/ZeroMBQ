@@ -21,6 +21,10 @@ add_test( publisher_badTCPPort ${PUBLISHER_PROJECT_NAME} -p blah )
 set_tests_properties( publisher_badTCPPort PROPERTIES WILL_FAIL TRUE )
 set_tests_properties( publisher_badTCPPort PROPERTIES FAIL_REGULAR_EXPRESSION "Invalid TCP port \"blah\"\n" )
 
+add_test( publisher_badTCPPort ${PUBLISHER_PROJECT_NAME} -p 1234567887654321 )
+set_tests_properties( publisher_badTCPPort PROPERTIES WILL_FAIL TRUE )
+set_tests_properties( publisher_badTCPPort PROPERTIES FAIL_REGULAR_EXPRESSION "Invalid TCP port \"1234567887654321\"\n" )
+
 add_test( publisher_noZMQTag ${PUBLISHER_PROJECT_NAME} -p 1234 )
 set_tests_properties( publisher_noZMQTag PROPERTIES WILL_FAIL TRUE )
 set_tests_properties( publisher_noZMQTag PROPERTIES FAIL_REGULAR_EXPRESSION "Error: ZeroMQ tag not specified.\nUse \"-t\"\n" )
