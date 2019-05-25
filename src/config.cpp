@@ -1,15 +1,15 @@
-#include <fstream>
+    #include <fstream>
 #include <iostream>
 
 #include "config.hpp"
-#include "dataItem.hpp"
+#include "dataPoint.hpp"
 
-ZeroMBQConfig::ZeroMBQConfig( )
+ZMBQConfig::ZMBQConfig( )
 {
 
 }
 
-bool ZeroMBQConfig::parseConfig( string filePath )
+bool ZMBQConfig::parseConfig( string filePath )
 {
     Json::Value root;
     Json::Reader reader;
@@ -17,38 +17,57 @@ bool ZeroMBQConfig::parseConfig( string filePath )
     ifstream file( filePath );
     file >> root;
 
-    parseSlaveConfig( root[ "slaves" ] );
+    parseDataPoints( root[ "dataPoints" ] );
+    parseMaps( root[ "maps" ] );
 
     return true;
 }
 
-void ZeroMBQConfig::parseSlaveConfig( const Json::Value slaves )
+void ZMBQConfig::parseDataPoints( const Json::Value dataPoints )
 {
-    for ( unsigned int slaveIndex = 0; slaveIndex < slaves.size(); slaveIndex++ )
+    m_dataPoints = ZMBQDataPointCollection( );
+
+    for ( unsigned int dataPointIndex = 0; dataPointIndex < dataPoints.size(); dataPointIndex++ )
     {
-        ZeroMBQSlave currSlave( slaves[ slaveIndex ][ "deviceID" ].asUInt( ) );
-        Json::Value currSlaveData = slaves[ slaveIndex ];
-        for ( unsigned int dataIndex = 0; dataIndex < currSlaveData[ "data" ].size(); dataIndex++ )
-        {
-            Json::Value currData = currSlaveData[ "data" ][ dataIndex ];
+        string name = dataPoints[ dataPointIndex ][ "name" ].asString( );
+        string type = dataPoints[ dataPointIndex ][ "type" ].asString( );
 
-            currSlave.AddDataItem( currData[ "tag" ].asString( ), 
-                new ZeroMBQDataItem( currData[ "address" ].asUInt( ), currData[ "order" ].asString( ), currData[ "tag" ].asString( ), currData[ "type" ].asString( ) ) );
-        }
-
-        m_slaveList[ currSlave.GetDeviceID( ) ] = currSlave;
+        m_dataPoints.addDataPoint( ZMBQDataPoint( name, type ) );
     }
 }
 
-ZeroMBQSlave* ZeroMBQConfig::getSlave( uint16_t deviceID )
+void ZMBQConfig::parseMaps( const Json::Value maps )
 {
-    if( m_slaveList.find( deviceID ) != m_slaveList.end( ) )
+    m_maps.clear( );
+
+    for ( unsigned int mapIndex = 0; mapIndex < maps.size(); mapIndex++ )
     {
-        return nullptr;
+        Json::Value currMapData = maps[ mapIndex ];
+
+        ZMBQMap currMap = ZMBQMap( currMapData[ "name" ].asString( ) );
+
+        Json::Value dataList = currMapData[ "dataList" ];
+        for ( unsigned int dataPointIndex = 0; dataPointIndex < dataList.size(); dataPointIndex++ )
+        {
+            Json::Value currData = dataList[ dataPointIndex ];
+            if( m_dataPoints.dataPointExists( currData[ "dataPoint" ].asString( ) ) )
+            {
+                currMap.InitMap_ExpandMap( currData[ "baseAddr" ].asUInt( ), m_dataPoints[ currData[ "dataPoint" ].asString( ) ].size_bytes( ) );
+            }
+        }
+
+        currMap.InitMap_Generate( );
+        
+        for ( unsigned int dataPointIndex = 0; dataPointIndex < dataList.size(); dataPointIndex++ )
+        {
+            Json::Value currData = dataList[ dataPointIndex ];
+            if( m_dataPoints.dataPointExists( currData[ "dataPoint" ].asString( ) ) )
+            {
+                m_dataPoints[ currData[ "dataPoint" ].asString( ) ].addDataLocation( currMap.GetDataPointer_InputRegs( currData[ "baseAddr" ].asUInt( ) ) );
+                m_dataPoints[ currData[ "dataPoint" ].asString( ) ].addDataLocation( currMap.GetDataPointer_HoldingRegs( currData[ "baseAddr" ].asUInt( ) ) );
+            }
+        }
+
+        m_maps[ currMap.GetName( ) ] = currMap;
     }
-    else
-    {
-        return &( m_slaveList[ deviceID ] );
-    }
-    
 }

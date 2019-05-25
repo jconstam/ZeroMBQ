@@ -8,21 +8,25 @@
 
 using namespace std;
 
-#define DATA_TYPE_RAW_SIZE          ( sizeof( uint32_t ) )
-#define ZMQ_BUFFER_SIZE_UINT16      ( DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) )
-#define ZMQ_BUFFER_SIZE_UINT32      ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) )
-#define ZMQ_BUFFER_SIZE_MAX         ( max( ZMQ_BUFFER_SIZE_UINT32, ZMQ_BUFFER_SIZE_UINT16 ) )
+#define DATA_TYPE_RAW_SIZE              ( sizeof( uint32_t ) )
+#define ZMQ_BUFFER_SIZE_UINT16          ( DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) )
+#define ZMQ_BUFFER_SIZE_UINT32          ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) )
+#define ZMQ_BUFFER_SIZE_FLOAT           ( DATA_TYPE_RAW_SIZE + sizeof( float ) )
+#define ZMQ_BUFFER_SIZE_MAX             ( max( ZMQ_BUFFER_SIZE_UINT32, ZMQ_BUFFER_SIZE_UINT16 ) )
 
-#define DATATYPE_STRING_UINT16      "uint16"
-#define DATATYPE_STRING_UINT32      "uint32"
+#define ZMQ_MAX_TOPIC_LEN               ( 1024U )
 
-typedef bool (*ConvertFromZMQFunc)( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-typedef size_t (*ConvertToZMQFunc)( void* value, void* buffer, uint32_t bufferSize );
+#define DATATYPE_STRING_UINT16          "uint16"
+#define DATATYPE_STRING_UINT32          "uint32"
+#define DATATYPE_STRING_FLOAT           "float"
+
+#define ZMQ_DATA_MSG_DATA_PTR( msg )    ( &( ( ( uint8_t* ) msg )[ DATA_TYPE_RAW_SIZE ] ) )
 
 typedef enum
 {
     DATA_TYPE_UINT16,
-    DATA_TYPE_UINT32
+    DATA_TYPE_UINT32,
+    DATA_TYPE_FLOAT
 } DATA_TYPE;
 
 typedef struct
@@ -37,24 +41,18 @@ typedef struct
     uint32_t value;
 } RAWDATA_UINT32;
 
+typedef struct
+{
+    DATA_TYPE type;
+    float value;
+} RAWDATA_FLOAT;
+
 class ZMBQData
 {
     private:
     public:
         static DATA_TYPE typeFromString( string typeString );
-
-        static ConvertFromZMQFunc getConvertFromZMQFunc( DATA_TYPE type, string order );
-        static ConvertToZMQFunc getConvertToZMQFunc( DATA_TYPE type, string order );
-
-        static bool Convert_zmq_to_uint16_12( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_zmq_to_uint16_21( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_zmq_to_uint32_4321( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-        static bool Convert_zmq_to_uint32_1234( void* rawData, uint8_t* outBuffer, uint32_t bufferIndex, uint32_t bufferSize );
-
-        static size_t Convert_uint16_12_to_zmq( void* value, void* buffer, uint32_t bufferSize );
-        static size_t Convert_uint16_21_to_zmq( void* value, void* buffer, uint32_t bufferSize );        
-        static size_t Convert_uint32_1234_to_zmq( void* value, void* buffer, uint32_t bufferSize );
-        static size_t Convert_uint32_4321_to_zmq( void* value, void* buffer, uint32_t bufferSize );
+        static int typeSize( DATA_TYPE type );
 };
 
 #endif

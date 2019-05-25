@@ -1,12 +1,16 @@
 ROOT_PATH=$(shell pwd)
 
 SOURCE_PATH=${ROOT_PATH}/src
+INCLUDE_PATH=${ROOT_PATH}/include
 TEST_PATH=${ROOT_PATH}/test
 
 BUILD_PATH=${ROOT_PATH}/build
 OUTPUT_PATH=${BUILD_PATH}/zerombq
 OUTPUT_TEST_PATH=${BUILD_PATH}/test
 OUTPUT_UNITTEST_PATH=${OUTPUT_TEST_PATH}/unittests
+OUTPUT_DOXYGEN_PATH=${BUILD_PATH}/doxygen
+
+DOXYFILE_PATH=${ROOT_PATH}/doc/doxygen/doxyfile
 
 .PHONY: build
 build:
@@ -29,3 +33,8 @@ build_unittests:
 .PHONY: clean
 clean:
 	rm -rf ${BUILD_PATH}
+
+.PHONY: doxygen
+doxygen:
+	mkdir -p ${OUTPUT_DOXYGEN_PATH}
+	cd ${OUTPUT_DOXYGEN_PATH} && ( cat ${DOXYFILE_PATH} ; echo "INPUT=${SOURCE_PATH} ${INCLUDE_PATH}" ) | doxygen -

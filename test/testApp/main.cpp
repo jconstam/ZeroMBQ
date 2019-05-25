@@ -6,7 +6,7 @@ using namespace std;
 
 int main( int argc, char *argv[] )
 { 
-    ZeroMBQConfig config;
+    ZMBQConfig config;
 
     if( argc != 2 )
     {

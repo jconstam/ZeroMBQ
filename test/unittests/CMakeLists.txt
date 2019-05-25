@@ -17,14 +17,31 @@ add_subdirectory( ${CMAKE_CURRENT_BINARY_DIR}/googletest-src ${CMAKE_CURRENT_BIN
 
 set( UNITTEST_SOURCES
     ${SOURCES_ROOT}/data.cpp
-    ${SOURCES_ROOT}/dataItem.cpp
+    ${SOURCES_ROOT}/dataPoint.cpp
 
     ${UNITTEST_ROOT}/dataTest.cpp
-    ${UNITTEST_ROOT}/dataItemTest.cpp
+    ${UNITTEST_ROOT}/dataPointTest.cpp
 )
 
+find_package( PkgConfig REQUIRED )
+pkg_check_modules( JSONCPP REQUIRED jsoncpp )
+pkg_check_modules( LIBMODBUS REQUIRED libmodbus )
+
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -g -O0" )
+
 set( UNITTEST_PROJECT_NAME "ZeroMBQTest" )
-include_directories( ${UNITTEST_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include )
+include_directories( ${UNITTEST_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include ${JSONCPP_INCLUDE_DIRS} ${LIBMODBUS_INCLUDE_DIRS} )
 add_executable( ${UNITTEST_PROJECT_NAME} ${UNITTEST_SOURCES} )
-target_link_libraries( ${UNITTEST_PROJECT_NAME} gtest_main )
+target_link_libraries( ${UNITTEST_PROJECT_NAME} gtest_main zmq jsoncpp modbus )
+
 add_test( unittests ${UNITTEST_PROJECT_NAME} )
+add_test( unittest_coverage 
+          gcovr 
+          --root ${PROJECT_SOURCE_DIR}/.. 
+          --exclude .*test.* 
+          --sort-percentage 
+          --keep 
+          --print-summary 
+          --fail-under-line 38 
+          --fail-under-branch 26 
+          )

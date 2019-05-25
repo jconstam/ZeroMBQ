@@ -2,21 +2,38 @@ language: cpp
 compiler: gcc
 dist: xenial
 
+before_install:
+  - sudo pip install gcovr
+
 addons:
   apt:
     packages:
       cmake
       libzmq3-dev
       libjsoncpp-dev
+      libmodbus-dev
       doxygen
       graphviz
+      python-pip
 
 jobs:
   include:
     - stage: test
-      name: "Unit Tests"
-      script: make -j unittests
+      name: "Testing"
+      script: make -j test
     - stage: build
       name: "Build Binary"
       script: make -j
+    - stage: doc
+      name: "Generate Documentation"
+      script: make -j doxygen
+      deploy:
+        provider: pages
+        repo: jconstam/ZeroMBQDocs
+        skip_cleanup: true
+        github_token: $GITHUB_API_KEY
+        keep_history: true
+        local_dir: build/doxygen/html
+        on:
+          branch: master
       
