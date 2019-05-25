@@ -2,6 +2,9 @@ language: cpp
 compiler: gcc
 dist: xenial
 
+before_install:
+  - sudo pip install gcovr
+
 addons:
   apt:
     packages:
@@ -11,6 +14,7 @@ addons:
       libmodbus-dev
       doxygen
       graphviz
+      python-pip
 
 jobs:
   include:
