@@ -1,3 +1,5 @@
+TRAVIS_BUILD_NUMBER ?= 0
+
 ROOT_PATH=$(shell pwd)
 
 SOURCE_PATH=${ROOT_PATH}/src
@@ -37,4 +39,4 @@ clean:
 .PHONY: doxygen
 doxygen:
 	mkdir -p ${OUTPUT_DOXYGEN_PATH}
-	cd ${OUTPUT_DOXYGEN_PATH} && ( cat ${DOXYFILE_PATH} ; echo "INPUT=${SOURCE_PATH} ${INCLUDE_PATH}" ) | doxygen -
+	cd ${OUTPUT_DOXYGEN_PATH} && ( cat ${DOXYFILE_PATH} ; echo "INPUT=${SOURCE_PATH} ${INCLUDE_PATH} ${DOXYFILE_PATH}"; echo "PROJECT_NUMBER=${TRAVIS_BUILD_NUMBER}" ) | doxygen -
