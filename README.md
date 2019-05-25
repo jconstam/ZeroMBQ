@@ -17,4 +17,5 @@ A [ZeroMQ](https://github.com/zeromq) Modbus server.  This library provides a sy
 * Support Modbus TCP and RTU
 
 # Documentation
+See [Doxygen documentation](https://jconstam.github.io/ZeroMBQDocs/)
 See the doc folder

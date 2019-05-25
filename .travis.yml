@@ -35,5 +35,5 @@ jobs:
         keep_history: true
         local_dir: build/doxygen/html
         on:
-          branch: feature/configUpdate
+          branch: master
       
