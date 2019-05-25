@@ -24,4 +24,17 @@ jobs:
     - stage: build
       name: "Build Binary"
       script: make -j
+    - stage: doc
+      name: "Generate Documentation"
+      script: make -j doxygen
+
+deploy:
+  provider: pages
+  repo: jconstam/ZeroMBQDocs
+  skip_cleanup: true
+  github_token: $GITHUB_API_KEY
+  keep_history: true
+  local_dir: build/doxygen/html
+  on:
+    branch: gh-pages
       

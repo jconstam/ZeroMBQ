@@ -7,6 +7,7 @@ A [ZeroMQ](https://github.com/zeromq) Modbus server.  This library provides a sy
 * CMake 3.5 or later
 * ZeroMQ 4.1 or later
 * JsonCpp 1.7 or later 
+* libModbus 3.0.6 or later
 
 # Goals
 * Support user defined mapping of tag values to registers
