@@ -27,8 +27,6 @@ jobs:
     - stage: doc
       name: "Generate Documentation"
       script: make -j doxygen
-    - stage: deploy
-      name: "Deploy Results"
       deploy:
         provider: pages
         repo: jconstam/ZeroMBQDocs
