@@ -4,10 +4,10 @@ A [ZeroMQ](https://github.com/zeromq) Modbus server.  This library provides a sy
 [![Build Status](https://travis-ci.org/jconstam/ZeroMBQ.svg?branch=master)](https://travis-ci.org/jconstam/ZeroMBQ)
 
 # Dependencies
-* CMake 3.5 or later
-* ZeroMQ 4.1 or later
-* JsonCpp 1.7 or later 
-* libModbus 3.0.6 or later
+* [CMake](https://cmake.org/) 3.5 or later
+* [ZeroMQ](http://zeromq.org/) 4.1 or later
+* [JsonCpp](https://github.com/open-source-parsers/jsoncpp) 1.7 or later 
+* [libModbus](https://libmodbus.org/) 3.0.6 or later
 
 # Goals
 * Support user defined mapping of tag values to registers
