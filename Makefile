@@ -12,7 +12,9 @@ OUTPUT_TEST_PATH=${BUILD_PATH}/test
 OUTPUT_UNITTEST_PATH=${OUTPUT_TEST_PATH}/unittests
 OUTPUT_DOXYGEN_PATH=${BUILD_PATH}/doxygen
 
-DOXYFILE_PATH=${ROOT_PATH}/doc/doxygen/doxyfile
+DOC_PATH=${ROOT_PATH}/doc
+DOXYGEN_PATH=${DOC_PATH}/doxygen
+DOXYFILE_PATH=${DOXYGEN_PATH}/doxyfile
 
 .PHONY: build
 build:
@@ -39,4 +41,8 @@ clean:
 .PHONY: doxygen
 doxygen:
 	mkdir -p ${OUTPUT_DOXYGEN_PATH}
-	cd ${OUTPUT_DOXYGEN_PATH} && ( cat ${DOXYFILE_PATH} ; echo "INPUT=${SOURCE_PATH} ${INCLUDE_PATH} ${DOXYFILE_PATH}"; echo "PROJECT_NUMBER=${TRAVIS_BUILD_NUMBER}" ) | doxygen -
+	cd ${OUTPUT_DOXYGEN_PATH} && \
+		( cat ${DOXYFILE_PATH}; \
+		echo "INPUT=${SOURCE_PATH} ${INCLUDE_PATH} ${DOXYGEN_PATH} ${DOC_PATH}"; \
+		echo "PROJECT_NUMBER=${TRAVIS_BUILD_NUMBER}" \
+		) | doxygen -
