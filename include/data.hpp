@@ -6,8 +6,6 @@
 
 #include <stdint.h>
 
-using namespace std;
-
 #define DATA_TYPE_RAW_SIZE              ( sizeof( uint32_t ) )
 #define ZMQ_BUFFER_SIZE_UINT16          ( DATA_TYPE_RAW_SIZE + sizeof( uint16_t ) )
 #define ZMQ_BUFFER_SIZE_UINT32          ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) )
@@ -51,7 +49,7 @@ class ZMBQData
 {
     private:
     public:
-        static DATA_TYPE typeFromString( string typeString );
+        static DATA_TYPE typeFromString( std::string typeString );
         static int typeSize( DATA_TYPE type );
 };
 

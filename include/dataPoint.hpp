@@ -1,8 +1,6 @@
 #ifndef DATAPOINT_HPP__
 #define DATAPOINT_HPP__
 
-using namespace std;
-
 #include <string>
 #include <vector>
 #include <map>

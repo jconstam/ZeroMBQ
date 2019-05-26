@@ -1,8 +1,10 @@
-    #include <fstream>
+#include <fstream>
 #include <iostream>
 
 #include "config.hpp"
 #include "dataPoint.hpp"
+
+using namespace std;
 
 ZMBQConfig::ZMBQConfig( )
 {

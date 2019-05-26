@@ -3,7 +3,7 @@ compiler: gcc
 dist: xenial
 
 before_install:
-  - sudo pip install gcovr
+  - pip install --user gcovr
 
 addons:
   apt:
