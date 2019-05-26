@@ -116,12 +116,79 @@ static MODBUS_READER_PARAMS processArgs( int argc, char* argv[] )
     return params;
 }
 
-int main( int argc, char *argv[] )
+static int analyzeResults( MODBUS_READER_PARAMS* params, uint16_t* registers )
 {
     int result = EXIT_SUCCESS;
-    MODBUS_READER_PARAMS pubParams = processArgs( argc, argv );
+    float float_result;
+    uint32_t uint32_result;
 
-    pubParams.port++;
+    switch( params->type )
+    {
+        case DATA_TYPE_UINT16:
+            if( registers[ 0 ] != params->value_uint16 )
+            {
+                cerr << "Expected uint16 value " << params->value_uint16 << ". Got " << registers[ 0 ] << "." << endl;
+                result = EXIT_FAILURE;
+            }
+            break;
+        case DATA_TYPE_UINT32:
+            uint32_result = ( registers[ 0 ] << 16 ) + registers[ 1 ];
+            if( uint32_result != params->value_uint32 )
+            {
+                cerr << "Expected uint32 value " << params->value_uint32 << ". Got " << uint32_result << "." << endl;
+                result = EXIT_FAILURE;
+            }
+            break;
+        case DATA_TYPE_FLOAT:
+            float_result = modbus_get_float( registers );
+            if( ( float_result < params->value_float - 0.001 ) || ( float_result > params->value_float + 0.001 ) )
+            {
+                cerr << "Expected float value " << params->value_float << ". Got " << float_result << "." << endl;
+                result = EXIT_FAILURE;
+            }
+            break;
+    }
+
+    return result;
+}
+
+int main( int argc, char *argv[] )
+{
+    modbus_t* context;
+    int result = EXIT_SUCCESS;
+    uint16_t registers[ 8 ] = { 0 };
+    MODBUS_READER_PARAMS params = processArgs( argc, argv );
+
+    context = modbus_new_tcp( "127.0.0.1", params.port );
+    if( context == nullptr )
+    {
+        cerr << "Could not create libmodbus context on port " << params.port << endl;
+        result = EXIT_FAILURE;
+    }
+    else 
+    {
+        if( modbus_connect( context ) == -1 ) 
+        {
+            cerr << "Could not connect with libmodbus on port " << params.port << endl;
+            result = EXIT_FAILURE;
+        }
+        else 
+        {
+            if( modbus_read_registers( context, params.baseRegister, ZMBQData::typeSize( params.type ) / sizeof( uint16_t ), registers ) == -1 )
+            {
+                cerr << "Could not read " << ZMBQData::typeSize( params.type ) / sizeof( uint16_t ) << " registers from address " << params.baseRegister << "." << endl;
+                result = EXIT_FAILURE;
+            }
+            else
+            {
+                result = analyzeResults( &( params ), registers );
+            }
+
+            modbus_close( context );
+        }
+        
+        modbus_free( context );
+    }
 
     return result;
 }
