@@ -12,6 +12,7 @@ set( SOURCES
     ${PROJECT_SOURCE_DIR}/data.cpp
     ${PROJECT_SOURCE_DIR}/dataPoint.cpp
     ${PROJECT_SOURCE_DIR}/modbusMap.cpp
+    ${PROJECT_SOURCE_DIR}/modbusSlave.cpp
     ${PROJECT_SOURCE_DIR}/subscriber.cpp
 )
 
