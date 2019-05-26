@@ -23,3 +23,7 @@ Code
 |[dataPoint.cpp](@ref dataPoint.cpp)|[dataPoint.hpp](@ref dataPoint.hpp)|
 |[modbusMap.cpp](@ref modbusMap.cpp)|[modbusMap.hpp](@ref modbusMap.hpp)|
 |[subscriber.cpp](@ref subscriber.cpp)|[subscriber.hpp](@ref subscriber.hpp)|
+
+Code Metrics
+------------
+* [Unit Test Coverage](@ref test_coverage)

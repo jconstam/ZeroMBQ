@@ -44,5 +44,6 @@ doxygen:
 	cd ${OUTPUT_DOXYGEN_PATH} && \
 		( cat ${DOXYFILE_PATH}; \
 		echo "INPUT=${SOURCE_PATH} ${INCLUDE_PATH} ${DOXYGEN_PATH} ${DOC_PATH}"; \
+		echo "EXAMPLE_PATH=${OUTPUT_UNITTEST_PATH}"; \
 		echo "PROJECT_NUMBER=${TRAVIS_BUILD_NUMBER}" \
 		) | doxygen -
