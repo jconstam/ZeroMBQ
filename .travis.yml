@@ -18,15 +18,14 @@ addons:
 
 jobs:
   include:
-    - stage: test
-      name: "Testing"
-      script: make -j test
     - stage: build
       name: "Build Binary"
       script: make -j
-    - stage: doc
-      name: "Generate Documentation"
-      script: make -j doxygen
+    - stage: test
+      name: "Testing"
+      script: 
+        - make -j test
+        - make -j doxygen
       deploy:
         provider: pages
         repo: jconstam/ZeroMBQDocs
