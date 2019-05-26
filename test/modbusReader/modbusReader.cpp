@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include <zmq.hpp>
+#include <modbus.h>
 #include <data.hpp>
 
 using namespace std;
