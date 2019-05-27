@@ -33,7 +33,7 @@ class ZMBQConfig
 	/// @param maps a JSON node containing a list of data points.
         void parseMaps( const Json::Value maps );
 
-	/// @brief @ref ZMBQDataPointCOllection containing all of the data points in the configuration.
+	/// @brief @ref ZMBQDataPointCollection containing all of the data points in the configuration.
         ZMBQDataPointCollection m_dataPoints;
 	/// @brief std::map containing all of the maps in the configuration.
         std::map<std::string, ZMBQMap> m_maps;
