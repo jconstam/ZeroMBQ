@@ -2,9 +2,6 @@ language: cpp
 compiler: gcc
 dist: xenial
 
-before_install:
-  - pip install --user gcovr
-
 addons:
   apt:
     packages:
@@ -16,23 +13,21 @@ addons:
       graphviz
       python-pip
 
-jobs:
-  include:
-    - stage: build
-      name: "Build Binary"
-      script: make -j
-    - stage: test
-      name: "Testing"
-      script: 
-        - make -j test
-        - make doxygen
-      deploy:
-        provider: pages
-        repo: jconstam/ZeroMBQDocs
-        skip_cleanup: true
-        github_token: $GITHUB_API_KEY
-        keep_history: true
-        local_dir: build/doxygen/html
-        on:
-          branch: master
+install:
+  - pip install --user gcovr
+
+script:
+  - make -j
+  - make -j test
+  - make doxygen
+
+deploy:
+  provider: pages
+  repo: jconstam/ZeroMBQDocs
+  skip_cleanup: true
+  github_token: $GITHUB_API_KEY
+  keep_history: true
+  local_dir: build/doxygen/html
+  on:
+    branch: master
       
