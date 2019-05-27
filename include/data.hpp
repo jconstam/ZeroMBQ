@@ -3,7 +3,6 @@
 
 /// @file data.hpp
 /// @brief Contains generic data handling structs, enums, and classes.
-/// @link data.cpp
 
 #include <string>
 #include <map>
@@ -78,11 +77,11 @@ class ZMBQData
     private:
     public:
 	/// @brief Converts a type string to a @ref DATA_TYPE value.
-	/// @param typeString[in] The type string to convert.
+	/// @param typeString The type string to convert.
 	/// @return A valid @ref DATA_TYPE value.  Defaults to @ref DATA_TYPE_UINT16.
         static DATA_TYPE typeFromString( std::string typeString );
 	/// @brief Gets the size (in bytes) of a @ref DATA_TYPE value.
-	/// @param type[in] The data type to get the size of.
+	/// @param type The data type to get the size of.
 	/// @return The size of a value of the given type in bytes. If the given type is invalid, 0.
         static int typeSize( DATA_TYPE type );
 };

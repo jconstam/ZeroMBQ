@@ -1,3 +1,6 @@
+/// @file data.cpp
+/// @brief Contains the implementation of the @ref ZMBQData class.
+
 #include <iostream>
 #include <climits>
 
