@@ -45,4 +45,5 @@ add_test( unittest_coverage
           --fail-under-line 38 
           --fail-under-branch 26 
           --html -o ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_PROJECT_NAME}.html
+          ${COVERAGE_FLAGS}
           )

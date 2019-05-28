@@ -25,14 +25,20 @@ build:
 test: build_unittests
 	cd ${OUTPUT_TEST_PATH} && ctest --output-on-failure
 
-.PHONY: unittests
-unittests: build_unittests
-	cd ${OUTPUT_UNITTEST_PATH} && ./ZeroMBQTest
+.PHONY: test_coverage
+test_coverage: build_unittests_coverage
+	cd ${OUTPUT_TEST_PATH} && ctest --output-on-failure
 
 .PHONY: build_unittests
 build_unittests:
 	mkdir -p ${OUTPUT_TEST_PATH}
 	cd ${OUTPUT_TEST_PATH} && cmake ${TEST_PATH} && $(MAKE) $(MAKEFLAGS)
+
+.PHONY: build_unittests_coverage
+build_unittests_coverage:
+	mkdir -p ${OUTPUT_TEST_PATH}
+	cd ${OUTPUT_TEST_PATH} && cmake ${TEST_PATH} -DCOVERAGE_FLAGS=--html-detail && $(MAKE) $(MAKEFLAGS)
+
 
 .PHONY: clean
 clean:
