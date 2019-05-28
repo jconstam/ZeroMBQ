@@ -17,7 +17,7 @@
 #define ZMQ_BUFFER_SIZE_UINT32          ( DATA_TYPE_RAW_SIZE + sizeof( uint32_t ) )
 /// @brief Size of a raw ZeroMQ packet with a float payload
 #define ZMQ_BUFFER_SIZE_FLOAT           ( DATA_TYPE_RAW_SIZE + sizeof( float ) )
-/// @breif Maximum size of a raw ZeroMQ packet
+/// @brief Maximum size of a raw ZeroMQ packet
 #define ZMQ_BUFFER_SIZE_MAX             ( max( ZMQ_BUFFER_SIZE_UINT32, ZMQ_BUFFER_SIZE_UINT16 ) )
 
 /// @brief Maximum size of a ZeroMQ topic
