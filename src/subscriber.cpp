@@ -6,15 +6,6 @@
 using namespace std;
 using namespace zmq;
 
-static bool socketHasMoreData( void* socket )
-{
-    int hasData = false;
-    size_t hasDataSize = 0;
-    zmq_getsockopt( socket, ZMQ_RCVMORE, &( hasData ), &( hasDataSize ) );
-
-    return ( ( hasDataSize > 0 ) && ( hasData == true ) );
-}
-
 ZMQSubscriber::ZMQSubscriber( int tcpPort )
 {
     m_tcpPort = tcpPort;
@@ -53,7 +44,6 @@ void ZMQSubscriber::subThreadFunction( vector<string> subscriptions, ZMBQDataPoi
     while( m_stopRequested != true )
     {
         char topicBuffer[ ZMQ_MAX_TOPIC_LEN ] = { 0 };
-        uint8_t dataBuffer[ ZMQ_BUFFER_SIZE_MAX ] = { 0 };
 
         int topicSize = zmq_recv( m_subSocket, topicBuffer, ZMQ_MAX_TOPIC_LEN, 0 );
         if( topicSize <= 0 )
@@ -63,6 +53,8 @@ void ZMQSubscriber::subThreadFunction( vector<string> subscriptions, ZMBQDataPoi
 
         if( socketHasMoreData( m_subSocket ) )
         {
+            uint8_t dataBuffer[ ZMQ_BUFFER_SIZE_MAX ] = { 0 };
+
             int dataSize = zmq_recv( m_subSocket, dataBuffer, ZMQ_BUFFER_SIZE_MAX, 0 );
             if( dataSize <= 0 )
             {
@@ -73,3 +65,13 @@ void ZMQSubscriber::subThreadFunction( vector<string> subscriptions, ZMBQDataPoi
         }
     }
 }
+
+bool ZMQSubscriber::socketHasMoreData( void* socket )
+{
+    int hasData = false;
+    size_t hasDataSize = 0;
+    zmq_getsockopt( socket, ZMQ_RCVMORE, &( hasData ), &( hasDataSize ) );
+
+    return ( ( hasDataSize > 0 ) && ( ( bool ) hasData == true ) );
+}
+

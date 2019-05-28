@@ -36,3 +36,7 @@
 
 # Build Folder
 build/
+
+# Vim Swap Files
+*.swp
+

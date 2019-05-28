@@ -26,5 +26,9 @@ A [ZeroMQ](https://github.com/zeromq) Modbus server.  This library provides a sy
 |[modbusMap.cpp](@ref modbusMap.cpp)|[modbusMap.hpp](@ref modbusMap.hpp)|
 |[subscriber.cpp](@ref subscriber.cpp)|[subscriber.hpp](@ref subscriber.hpp)|
 
+## Documentation
+* [Architecture](@ref Architecture) 
+* [Requirements](@ref Requirements)
+
 ## Code Metrics
 * [Unit Test Coverage](@ref test_coverage)

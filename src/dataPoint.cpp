@@ -4,11 +4,6 @@
 
 using namespace std;
 
-ZMBQDataPoint::ZMBQDataPoint( ) : ZMBQDataPoint( "Unknown", "uint16" )
-{
-    
-}
-
 ZMBQDataPoint::ZMBQDataPoint( string name, string typeString )
 {
     m_name = name;

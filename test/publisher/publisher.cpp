@@ -25,7 +25,7 @@ using namespace std;
             fprintf( stderr, "Error: \"%s\" is not a valid %s\n", typeString.c_str( ), typeName ); \
             exit( EXIT_FAILURE ); \
         } \
-        if( testValue > ( maxValue ) || testValue < ( minValue ) ) \
+        if( testValue > ( long int )( maxValue ) || testValue < ( long int )( minValue ) ) \
         { \
             fprintf( stderr, "Error: Failed to parse value \"%s\" as a %s\n", typeString.c_str( ), typeName ); \
             exit( EXIT_FAILURE ); \
@@ -106,10 +106,10 @@ static PUBLISHER_PARAMS processArgs( int argc, char* argv[] )
     switch( params.type )
     {
         case DATA_TYPE_UINT16:
-            CHECK_VALUE_RANGE( typeString, UINT16_MAX, 0, uint16_t, "uint16", params.value_uint16 );
+            CHECK_VALUE_RANGE( typeString, UINT16_MAX, 0U, uint16_t, "uint16", params.value_uint16 );
             break;
         case DATA_TYPE_UINT32:
-            CHECK_VALUE_RANGE( typeString, UINT32_MAX, 0, uint32_t, "uint32", params.value_uint32 );
+            CHECK_VALUE_RANGE( typeString, UINT32_MAX, 0U, uint32_t, "uint32", params.value_uint32 );
             break;
         case DATA_TYPE_FLOAT:
             CHECK_VALUE_RANGE( typeString, FLT_MAX, FLT_MIN, float, "float", params.value_float );

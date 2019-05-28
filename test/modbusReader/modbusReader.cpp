@@ -25,7 +25,7 @@ using namespace std;
             cerr << "Error: " << typeString << " is not a valid " << typeName << endl; \
             exit( EXIT_FAILURE ); \
         } \
-        if( testValue > ( maxValue ) || testValue < ( minValue ) ) \
+        if( testValue > ( long int )( maxValue ) || testValue < ( long int )( minValue ) ) \
         { \
             cerr << "Error: Failed to parse value " << typeString << " as a " << typeName << endl; \
             exit( EXIT_FAILURE ); \
