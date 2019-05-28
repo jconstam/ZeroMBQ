@@ -6,15 +6,6 @@
 using namespace std;
 using namespace zmq;
 
-static bool socketHasMoreData( void* socket )
-{
-    int hasData = false;
-    size_t hasDataSize = 0;
-    zmq_getsockopt( socket, ZMQ_RCVMORE, &( hasData ), &( hasDataSize ) );
-
-    return ( ( hasDataSize > 0 ) && ( ( bool ) hasData == true ) );
-}
-
 ZMQSubscriber::ZMQSubscriber( int tcpPort )
 {
     m_tcpPort = tcpPort;
@@ -74,3 +65,13 @@ void ZMQSubscriber::subThreadFunction( vector<string> subscriptions, ZMBQDataPoi
         }
     }
 }
+
+bool ZMQSubscriber::socketHasMoreData( void* socket )
+{
+    int hasData = false;
+    size_t hasDataSize = 0;
+    zmq_getsockopt( socket, ZMQ_RCVMORE, &( hasData ), &( hasDataSize ) );
+
+    return ( ( hasDataSize > 0 ) && ( ( bool ) hasData == true ) );
+}
+

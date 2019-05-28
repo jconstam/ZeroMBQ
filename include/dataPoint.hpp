@@ -15,7 +15,7 @@ class ZMBQDataPoint
 {
     public:
 	/// @brief Basic constructor.  Initializes a data point with the name "Unknown" and the type uint16_t.
-        ZMBQDataPoint( );
+        ZMBQDataPoint( ) : ZMBQDataPoint( "Unknown", "uint16" ){};
 	/// @brief Normal constructor.  Sets up @ref m_name, @ref m_type, @ref m_size, and initializes @ref m_dataLocations.
         ZMBQDataPoint( std::string name, std::string type );
 
