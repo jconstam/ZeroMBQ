@@ -32,9 +32,9 @@ class ZMBQDataPoint
 	/// @brief Adds a data location to the data point's list of destination pointers.
 	/// @param dataPointer Pointer to the data location.
         void addDataLocation( void* dataPointer );
-	/// @brief Publishes new data to all of the destination pointers.
+	/// @brief WRites new data to all of the destination pointers in Modbus maps.
 	/// @param dataMessage Pointer to the new data received from ZeroMQ.
-        void publish( void* dataMessage );
+        void writeToModbus( void* dataMessage );
 
     private:
 	/// @brief Contains the name of the data point.
@@ -68,10 +68,10 @@ class ZMBQDataPointCollection
 	/// @return false - The data point does not exist in the collection.
         bool dataPointExists( std::string name );
 
-	/// @brief Calls the @ref ZMBQDataPoint::publish function for the @ref ZMBQDataPoint object with the given name.
+	/// @brief Calls the @ref ZMBQDataPoint::writeToModbus function for the @ref ZMBQDataPoint object with the given name.
 	/// @param topic The ZeroMQ topic that was received.  Corresponds to the name of the data point.
 	/// @param buffer The ZeroMQ data buffer that was received.
-        void publishNewData( std::string topic, uint8_t* buffer );
+        void writeAllDataToModbus( std::string topic, uint8_t* buffer );
     
     private:
 	/// @brief std::map containing the data points.

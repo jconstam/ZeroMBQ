@@ -27,7 +27,7 @@ find_package( PkgConfig REQUIRED )
 pkg_check_modules( JSONCPP REQUIRED jsoncpp )
 pkg_check_modules( LIBMODBUS REQUIRED libmodbus )
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -g -O0" )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fno-exceptions -fno-inline -g -O0" )
 
 set( UNITTEST_PROJECT_NAME "ZeroMBQTest" )
 include_directories( ${UNITTEST_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/../include ${JSONCPP_INCLUDE_DIRS} ${LIBMODBUS_INCLUDE_DIRS} )
@@ -42,8 +42,8 @@ add_test( unittest_coverage
           --sort-percentage 
           --keep 
           --print-summary 
-          --fail-under-line 38 
-          --fail-under-branch 26 
+          --fail-under-line 100 
+          --fail-under-branch 87 
           --html -o ${CMAKE_CURRENT_BINARY_DIR}/${UNITTEST_PROJECT_NAME}.html
           ${COVERAGE_FLAGS}
           )

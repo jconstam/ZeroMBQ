@@ -61,7 +61,7 @@ void ZMQSubscriber::subThreadFunction( vector<string> subscriptions, ZMBQDataPoi
                 break;
             }
 
-            dataPoints.publishNewData( string( topicBuffer ), dataBuffer );
+            dataPoints.writeAllDataToModbus( string( topicBuffer ), dataBuffer );
         }
     }
 }

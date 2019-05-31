@@ -16,7 +16,7 @@ void ZMBQDataPoint::addDataLocation( void* dataPointer )
     m_dataLocations.push_back( dataPointer );
 }
 
-void ZMBQDataPoint::publish( void* dataMessage )
+void ZMBQDataPoint::writeToModbus( void* dataMessage )
 {
     for( auto &dataLocation : m_dataLocations )
     {
@@ -44,10 +44,10 @@ bool ZMBQDataPointCollection::dataPointExists( std::string name )
     return ( m_dataPoints.find( name ) != m_dataPoints.end( ) );
 }
 
-void ZMBQDataPointCollection::publishNewData( string topic, uint8_t* buffer )
+void ZMBQDataPointCollection::writeAllDataToModbus( string topic, uint8_t* buffer )
 {
     if( m_dataPoints.find( topic ) != m_dataPoints.end( ) )
     {
-        m_dataPoints[ topic ].publish( buffer );
+        m_dataPoints[ topic ].writeToModbus( buffer );
     }
 }

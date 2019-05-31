@@ -40,7 +40,7 @@ int ZMBQData::typeSize( DATA_TYPE type )
             return sizeof( float );
         case( DATA_TYPE_UINT16 ):
             return sizeof( uint16_t );
+	default:
+	    return 0;
     }
-
-    return 0;
 }
